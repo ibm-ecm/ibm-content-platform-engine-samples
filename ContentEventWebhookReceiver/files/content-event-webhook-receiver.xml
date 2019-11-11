@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<server>
+	<application id="content-event-webhook-receiver" location="${server.config.dir}/apps/content-event-webhook-receiver.war" name="webhook">
+	</application>
+
+	<apiDiscovery publicURL="/v2/hook/api"/>
+		<openapi publicURL="/v2/hook/api" >
+		<webModuleDoc contextRoot="/webhook" enabled= "true" public="true" />
+	</openapi>
+
+	<logging traceSpecification="com.ibm.ecm.sample.webhook=all:*=info" consoleLogLevel="INFO"/>
+</server>

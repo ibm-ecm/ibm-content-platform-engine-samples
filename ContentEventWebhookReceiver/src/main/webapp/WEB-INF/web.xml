@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>WebhookReceiver</display-name>
+  <servlet>
+     <servlet-name>WebhookReceiverApplication</servlet-name>
+     <servlet-class>com.ibm.websphere.jaxrs.server.IBMRestServlet</servlet-class>
+     <init-param>
+         <param-name>javax.ws.rs.Application</param-name>
+         <param-value>com.ibm.ecm.sample.webhook.WebhookReceiverApplication</param-value>
+     </init-param>
+     
+     <load-on-startup>1</load-on-startup>
+  </servlet>
+<listener>
+	<listener-class>com.ibm.ecm.sample.webhook.WebhookReceiverServletContextListener</listener-class>
+</listener>
+<servlet-mapping>
+   <servlet-name>WebhookReceiverApplication</servlet-name>
+   <url-pattern>/*</url-pattern>
+ </servlet-mapping>
+</web-app>

@@ -1,0 +1,46 @@
+plugins {
+    // Apply the java plugin to add support for Java
+    id 'java'
+
+    // Apply the war plugin to add support for building an application
+    id 'war'
+
+    // Apply the eclipse plugin to add support for building an eclipse project
+    id 'eclipse'
+}
+
+repositories {
+    // Use jcenter for resolving dependencies.
+    jcenter()
+}
+
+dependencies {
+    // Libraries provided by application server
+    providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
+    providedCompile 'javax.ws.rs:javax.ws.rs-api:2.1'
+
+    // Libraries to include in application
+    implementation 'org.json:json:20180813'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.9'
+
+    // This library is needed if you wish to filter logged strings for newline and HTML characters 
+    //implementation 'commons-lang:commons-lang:2.6'
+}
+
+war {
+    manifest {
+        attributes("Specification-Title": "Content Event Webhook Receiver sample application",
+                   "Specification-Version": "5.5.4.0",
+                   "Specification-Vendor": "IBM Corporation",
+                   "Implementation-Title": "Content Event Webhook Receiver sample application",
+                   "Implementation-Version": "5.5.4.0",
+                   "Implementation-Vendor": "IBM Corporation",
+                   "Build-Date": new java.text.SimpleDateFormat("yyyy.MMMMM.dd hh:mm:ss aaa").format(new Date()),
+                   "Copyright": "Copyright IBM Corp. 2019  All rights reserved",
+                   "Permissions": "all-permissions",
+                   "Codebase": "*")
+    }
+    archiveName = 'content-event-webhook-receiver.war'
+}
+
+defaultTasks 'war'
