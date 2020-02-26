@@ -49,11 +49,12 @@ import com.ibm.ecm.sample.webhook.exception.HMACSecurityException;
  * the Content Event Webhook External Event Action. On the Content Platform
  * Engine side, the External Event Action has an External Receiver Credentials
  * (EevEventReceiverCredentials) property, where the user specifies the
- * credential type. In CPE 5.5.4, only HMAC credentials and the {@code HmacSHA1}
- * algorithm are supported. The user must specify a secret value in the External
- * Receiver Credentials that matches the secret value on the External Event
- * Receiver application. This secret value is then used as a cryptographic key
- * along with the External Event action payload to generate an HMAC value.
+ * credential type. In Content Platform Engine 5.5.4, only HMAC credentials and
+ * the {@code HmacSHA1} algorithm are supported. The user must specify a secret
+ * value in the External Receiver Credentials that matches the secret value on
+ * the External Event Receiver application. This secret value is then used as a
+ * cryptographic key along with the External Event action payload to generate an
+ * HMAC value.
  * <p>
  * The HMC credential serves two purposes:
  * <p>
@@ -61,7 +62,7 @@ import com.ibm.ecm.sample.webhook.exception.HMACSecurityException;
  * <li>Verify that the External Event Action callout is meant specifically for
  * this Receiver application and not a different Receiver application
  * <li>Validate that the request has not been tampered with and is coming from
- * the trusted sender (the CPE server)
+ * the trusted sender (the Content Platform Engine server)
  * </ol>
  * <p>
  */

@@ -67,7 +67,8 @@ public class WebhookReceiver {
 
     /**
      * This is the entry point for the Webhook Receiver to receive events from
-     * CPE. Every time an event is received, the following events will occur.
+     * Content Platform Engine. Every time an event is received, the following
+     * events will occur.
      * 
      * <p>
      * <ol>

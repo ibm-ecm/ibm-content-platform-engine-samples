@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Changed
+- Updated [README.md](ContentEventWebhookReceiver/README.md).
+- Changed Javadoc, expanding instances of "CPE" to "Content Platform Engine."
+
 ## [5.5.4.0] - 2019-12-12
 
 ### Added

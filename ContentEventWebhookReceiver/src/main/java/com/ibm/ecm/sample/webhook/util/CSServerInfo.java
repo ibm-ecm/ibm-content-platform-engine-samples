@@ -32,9 +32,9 @@ import java.util.Properties;
  * to process the document that triggered the Webhook's subscription.
  * 
  * Make sure to change the information set in CSServerInfo.properties to have
- * the appropriate Content Services GraphQL server URL and CPE admin user to use
- * for setting up the Content Event Webhook event action and subscription and
- * callback logic.
+ * the appropriate Content Services GraphQL server URL and Content Platform
+ * Engine admin user to use for setting up the Content Event Webhook event
+ * action and subscription and callback logic.
  * 
  * Note that user credentials are stored in clear text in
  * {@code CSServerInfo.properties} for simplicity of setup of this sample
@@ -53,11 +53,11 @@ public class CSServerInfo {
      */
     public static final String WEBHOOK_RECEIVER_URL;
     /**
-     * CPE/Content Services user. User must have full control on the Object
-     * Store configured for the Content Event Webhook
+     * Content Platform Engine/Content Services user. User must have full
+     * control on the Object Store configured for the Content Event Webhook
      */
     public static final String CS_SERVER_USERNAME ;
-    /** CPE/Content Services password. */
+    /** Content Platform Engine/Content Services password. */
     public static final String CS_SERVER_PASSWORD;
 
     /**
