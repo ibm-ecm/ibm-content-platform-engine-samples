@@ -122,7 +122,7 @@ When using the Webhook Receiver sample application for the first time, make sure
 You can modify the sample application as needed to implement any required logic. A number of GraphQL calls are included as an example. The logic can be freely modified as necessary to accommodate the specific use case for the webhook. Here are some things of note when customizing the sample application:
 
 - [build.gradle](build.gradle)
-  - If additional dependencies are required, add them here. Dependencies are downloaded from [JCenter](https://bintray.com/bintray/jcenter) in the sample application, but the repository can be changed as needed.
+  - If additional dependencies are required, add them here. Dependencies are downloaded from [Maven Central](https://search.maven.org/) in the sample application, but the repository can be changed as needed.
   - To enable HTML character and newline character filtering, the `'commons-lang:commons-lang:2.6'` dependency must be uncommented. See the `WebhookReceiverLogger` class below for more information.
 - [content-event-webhook-receiver.xml](files/content-event-webhook-receiver.xml)
   - The sample application deployment descriptor information is contained in this file. This file might need to be modified to accommodate the details of the Liberty server.
@@ -160,7 +160,7 @@ You can modify the sample application as needed to implement any required logic.
 
 ---
 ### Building the Webhook Receiver sample application
-This project uses the [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html) to download a Gradle distribution to execute its build. The Gradle distribution and build dependencies are downloaded from [JCenter](https://bintray.com/bintray/jcenter). Execute the build by running one of the following scripts located in the root of this folder. The Gradle distribution will be downloaded if it does not already exist locally.
+This project uses the [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html) to download a Gradle distribution to execute its build. The Gradle distribution is downloaded from [Gradle Services](https://services.gradle.org/distributions/) and build dependencies are downloaded from [Maven Central](https://search.maven.org/). Execute the build by running one of the following scripts located in the root of this folder. The Gradle distribution will be downloaded if it does not already exist locally.
 
 - **Windows**: `gradlew.bat war`
 - **Linux/Mac**: `./gradlew war`
