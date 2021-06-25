@@ -1,0 +1,267 @@
+#/* 
+# IBM Confidential
+# OCO Source Materials
+# 5737-I23
+# Copyright IBM Corp. 2021
+# The source code for this program is not published or otherwise divested of its trade secrets, irrespective of what has been deposited with the U.S Copyright Office.
+# */
+#
+# Prereq: 
+#       1. tWAS 9.0.5 installed for GraphQL
+#       2. CPE 5.5.7 system deployed and configured on tWAS9.0.5
+#       3. download shell scripts into <sh_script_dir>
+#       4. download wsadmin scripts into <wsadmin_script_dir>
+#       5. download artifacts on GraphQL system. Artifacts include:
+#       6. Script has to be executed on GraphQL system.
+#       7. Gather all hosts/credentials needed to configure this file.
+#
+# How to run script to set up:
+#       cd <script_dir>
+#       create your own property file based on configureGQL.properties.sample, call it configureGQL.properties.XXXXenv
+#       ./configureGQL.sh configureGQL.properties.XXXXenv
+#
+# What is this file:
+# Configuration file to define all env vars for DEPLOYING and CONFIGURING GrapQL 
+# Format: Define Key=Value  pairs, separated by '=' 
+# Restriction: that means you cannot use '=' in ANY Value
+# Key: is the same name as param passed in. 
+# Value: if value contains empty space and represent 1 single string, follow the bash convention to quote it. 
+#
+#
+#
+
+
+#------------------------------------------------------------------------------
+# Env vars needed by all scripts 
+# Prereq: WAS is already set up with a WASAdmin user to host GraphQL servlet. 
+#	Scritps are downloaded under a directory. 
+# cd to the directory where shell scripts are laid down and run from this location. 
+#------------------------------------------------------------------------------
+APPSERVER_BIN_DIR="REPLACE_WITH_CUSTOM_VALUE"
+			#directory to look for wsadmin
+			#Ex: /opt/IBM/WebSphere/AppServer/bin
+JYTHON_DIR="REPLACE_WITH_CUSTOM_VALUE" 			
+			#directory to download GraphQL wsadmin jthon scripts 
+			#Ex: /GraphQL/Jython
+SCRIPT_DIR="REPLACE_WITH_CUSTOM_VALUE"
+ 			#directory to download GraphQL wsadmin jthon scripts 
+			#Ex: /GraphQL/bash
+APPSERVER_WAS_USR="REPLACE_WITH_CUSTOM_VALUE"					
+			#user to allow wsadmin to connect to local appserver
+			#Ex: WOSAdmin
+APPSERVER_WAS_PWD="REPLACE_WITH_CUSTOM_VALUE"
+			#pwd of previous usr
+APPSERVER_CONN_TYPE=SOAP				#
+INSTALL_ON_CLUSTER=false				#leave as false. only support standalone for 2021 Q2	
+CLUSTER_NAME="REPLACE_WITH_CUSTOM_VALUE"           		        #leave as is	
+APPSERVER_NODE="REPLACE_WITH_CUSTOM_VALUE"			
+			#appserver node where GraphQL will be installed
+APPSERVER_CELL="REPLACE_WITH_CUSTOM_VALUE"			
+			#appserver cell where GraphQL will be installed
+APPSERVER_SVR="REPLACE_WITH_CUSTOM_VALUE"			
+			#appserver svr where GraphQL will be installed
+APPSERVER_PROFILE_DIR="REPLACE_WITH_CUSTOM_VALUE"
+			#Ex: /opt/IBM/WebSphere/AppServer/profiles/Default
+
+
+#------------------------------------------------------------------------------
+# Env vars needed by configuring Federated LDAP
+# The following vars are extracted from CMUI configureWASLDAPFederated.
+# Websphere link for explanation of param https://ibm/kc/help_base/com.ibm.ws.console.wim/ae/uwim_realmsettings.html
+# CMUI link for explanation of param
+#
+# Look for file wimconfig.xml on CPE server for information to fill in this section
+# Ex: ./AppServer/profiles/Default/config/cells/Cell1/wim/config/wimconfig.xml
+#------------------------------------------------------------------------------
+WASVERSION="9.0"
+REQUIRE_LDAP_SETUP="REPLACE_WITH_CUSTOM_VALUE"
+			# Boolean,value is either true or false
+			# Set to false if LDAP Federated is already set up (for example where GraphQL is installed in tWAS ND and CPE has 
+			#	already been installed previously or GraphQL is collocated with an appserver where another application, ICN
+			#   for example, has already set up this LDAP configuration.) If set to "true", LDAP will be configured. 
+WASADMIN="REPLACE_WITH_CUSTOM_VALUE"        
+			#optional: you can add a user from your new federated ldap realm to administer GraphQL twas console
+			#Ex: CEAdmin
+SETCURRENT="REPLACE_WITH_CUSTOM_VALUE"	
+			# true/false value
+			# need to match with CPE server
+LDAPTYPE="REPLACE_WITH_CUSTOM_VALUE"		
+			#type of LDAP server. 
+			#need to match with CPE LDAP Type
+			#Ex: IDS, ADAM
+LDAP_SVR="REPLACE_WITH_CUSTOM_VALUE"      	
+			#ldap server hosting authenticated users
+			#need to match with CPE server
+			#Ex: ldaphost
+LDAP_PORT="REPLACE_WITH_CUSTOM_VALUE"		
+			#ldap  port to connect to
+			# need to match with CPE server
+			#Ex: 389 if connect to LDAP in clear text, 636 if connect via SSL
+LDAP_ENABLE_SSL=false	
+			# true/false - whether SSL is required for LDAP communication
+			# need to match with CPE server
+LDAP_BIND_DN="REPLACE_WITH_CUSTOM_VALUE"	
+			#user DN to connect to LDAP for query back users/groups used by CPE
+			# need to match with CPE server
+			#Ex: cn=ceadmin,ou=myorg, dc=mydomain
+LDAP_BIND_PWD="REPLACE_WITH_CUSTOM_VALUE"	
+			#user pwd to connect to LDAP for query back users/groups used by CPE
+			# need to match with CPE server
+LDAP_BASE="REPLACE_WITH_CUSTOM_VALUE"	
+			#base dn to search for users/groups, need to match with CPE server
+			# need to match with CPE server
+			#Ex: ou=myorg, dc=mydomain
+LDAP_BASE_REPO="REPLACE_WITH_CUSTOM_VALUE" 
+			# name of this repo, 
+			# need to match with CPE server.
+REPO_ID="REPLACE_WITH_CUSTOM_VALUE"		
+			# a unique identifier for the repo, need to match with CPE server
+LDAP_LOGIN_PROP="REPLACE_WITH_CUSTOM_VALUE"	
+			# login property, need to match with CPE server
+LDAP_FED_REALM="REPLACE_WITH_CUSTOM_VALUE"	
+			# federated realm name, need to match with CPE server
+LDAP_GROUP_MEMBERSHIP_ATTR="REPLACE_WITH_CUSTOM_VALUE"		
+			# need to match with CPE server
+LDAP_GROUP_MEMBERSHIP_SCOPE="REPLACE_WITH_CUSTOM_VALUE"	
+			# need to match with CPE server
+			#Ex: direct
+LDAP_TURNOFF_SSL_CERTS="REPLACE_WITH_CUSTOM_VALUE"		
+			#true/false value	
+			# need to match with CPE server 
+LDAP_DOMAIN_NOT_SET="REPLACE_WITH_CUSTOM_VALUE"
+			#true/false value		
+			# need to match with CPE server
+
+
+#------------------------------------------------------------------------------
+# Env vars needed by enableApplicationSecurity
+# For now, none - script will ALWAYS enable
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Env vars needed by enableSSO
+#------------------------------------------------------------------------------
+SSO_DOMAIN="REPLACE_WITH_CUSTOM_VALUE"	
+			#Single sign-on domain
+			#Ex: mydomain.com				
+
+
+#------------------------------------------------------------------------------
+# Env vars needed by importLTPAKeys - ltpaKeys are stored at Global Security level, so there is 
+#	no need to import if GraphQL is colocated with CPE. Else, export from CPE server to an
+#	intermediate file and share this file to be imported to GraphQL
+# Prereq: CPE server is already set up and ltpa key is exported. 
+#------------------------------------------------------------------------------
+LTPA_INTERMEDIATE_FILE="REPLACE_WITH_CUSTOM_VALUE"	
+			#path to find the cpe exported ltpa keys
+			#Ex: /tmp/cpe_LTPA.key
+LTPA_PWD="REPLACE_WITH_CUSTOM_VALUE"
+			#pwd to decrypt cpe ltpa key
+
+#------------------------------------------------------------------------------
+# Env vars needed by addTrustedRealms - 
+# separated trusted realm with '|', for example "vcpe:389 | realm2 | realm3"
+#------------------------------------------------------------------------------
+INBOUND_REALMS_TRUSTED="REPLACE_WITH_CUSTOM_VALUE"
+					#Realm(s) trusted
+
+#------------------------------------------------------------------------------
+# Env vars needed by installation of GraphQL
+# Prereq: You need to get the GraphQL.war file and place in a directory.
+#------------------------------------------------------------------------------
+CONTENT_GRAPH_API_WAR_PATH="REPLACE_WITH_CUSTOM_VALUE"  	
+					#Path to find content-graphql-api.war
+					#Script will install this war file into the appserver
+					#Ex: /tmp/content-graphql-api.war
+					#This example shows that content-graph-api.war is downloaded to /tmp.
+UPDATE_WAR="REPLACE_WITH_CUSTOM_VALUE"      
+					#true/false value.
+					#true: allow to update war installed war.   					
+					#false: installation if there is already a war file in the destination
+GRAPHQL_APP_NAME="REPLACE_WITH_CUSTOM_VALUE"
+					#the name of the installed or deployed application. The application name must be 
+					#unique among all the applications within a cell. You cannot specify the same name 
+					#for two different applications, even if they have different application types. 
+					#Ex.: content-services-graphql
+
+
+#------------------------------------------------------------------------------
+# Env vars needed by crearteSharedLb.sh and associatedSharedLib.sh 
+# 	Follow sh script syntax, use " to mark value with space
+#	No space between key/value
+# Prereq: You need to get the Jace.jar file and place in a directory.
+#------------------------------------------------------------------------------
+JACE_JAR_FILE_PATH="REPLACE_WITH_CUSTOM_VALUE"
+			#Path to find Jace.jar. This path MUST exist at runtime since the
+			#Jace.jar library will be loaded from here.
+			#Ex: /tmp/Jace.jar
+			#This example shows that Jace.jar in downloaded to /tmp.
+JACE_JAR_SYMBOLIC_NAME="CPE 557 Client Libs"		
+			#Leave this value as is for 557 release and update if pick up a 
+			#different version of Jace.jar
+
+
+#------------------------------------------------------------------------------
+# Env vars needed by mapSecurity.sh 
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Env vars needed by setJVM.sh 
+#------------------------------------------------------------------------------
+CPE_URL="REPLACE_WITH_CUSTOM_VALUE"		
+			#path to CPE server. Make sure that CPE does respond to this URL.
+			#Ex: http://myCPEserver:9080/wsi/FNCEWS40MTOM/
+			#    https://myCPEserver:9443/wsi/FNCEWS40MTOM/  (if SSL is enabled)
+APPEND_JVM="REPLACE_WITH_CUSTOM_VALUE"			
+			#true/false value
+			#set to true if want to append to current Jvm argument.
+			#false to overwrite. If this server only hosts
+			#GraphQL, set it to false to overwrite what was there already. 
+			#JVM is set at the server level, so if the server is used
+			#to run more than 1 application, one might want to append instead.
+ECM_CONTENT_GRAPHQL_CORS_ORIGIN_URL="REPLACE_WITH_CUSTOM_VALUE" 
+			#Cross-origin Resource Sharing (CORS) allows you to make a request from one 
+			#website to another website in a the browser.  
+			#For development, you can use a * but we highly recommend setting this value to the list of allowed origins 
+			#for cross-origin resource sharing.  Ex: https://myserver.com:443, http://myserver.com:9080...  
+
+#------------------------------------------------------------------------------
+# Env vars needed by validateGraphQL post installation
+#------------------------------------------------------------------------------
+GraphQL_URL="REPLACE_WITH_CUSTOM_VALUE"		
+			#specify the GraphQL host/port portion of the URL - 
+			#script will append the context root to ping GraphQL
+			#Ex: http://myGraphQLServer:myport
+CPEOS_EXIST="REPLACE_WITH_CUSTOM_VALUE"	
+			# true or false value.
+			# if true, send curl cmd to check if can connect to CPE- required valid CPE_OS
+CPE_OS="REPLACE_WITH_CUSTOM_VALUE"	
+			#Optional: ObjectStore to validate GraphQL
+			#Ex: OS1
+
+
+#------------------------------------------------------------------------------
+# debugGQL: Env vars needed to turn on or off GraphQL debugging
+#       debug info will be sent to trace.log
+#------------------------------------------------------------------------------
+ENABLE_GQL_DBG="REPLACE_WITH_CUSTOM_VALUE"
+			# true or false to enable or disable GQL tracing
+			# trace output will be found in trace.log in the server where GraphQL runs
+			# for example: /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/logs/server1/trace.log
+ENABLE_LTPA_DBG="REPLACE_WITH_CUSTOM_VALUE"
+		  	# true or false to enable or disable  LTPA tracing
+			# trace output will be found in trace.log in the server where GraphQL runs
+		   
+
+#------------------------------------------------------------------------------
+# Env vars needed by useSSLComm 
+#------------------------------------------------------------------------------
+CPE_SELF_SIGNED_CERT="REPLACE_WITH_CUSTOM_VALUE"	
+				#if not set, will not import SSL cert into GraphQL trust store.
+				#You should go to CPE and export this certificate to a .pem format file
+				#Ex: /tmp/cpe.pem
+KEYSTOREPASS="REPLACE_WITH_CUSTOM_VALUE"
+				#password to update the trust.pk2 file on GraphQL server
+CPE_ALIAS="REPLACE_WITH_CUSTOM_VALUE"
+				#Alias in GraphQL truststore to identify this key
+				#Ex: cpe
