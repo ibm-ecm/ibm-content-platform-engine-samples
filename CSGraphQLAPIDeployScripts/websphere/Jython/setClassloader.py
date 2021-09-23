@@ -8,10 +8,10 @@
 #See: https://www.ibm.com/docs/en/was-zos/8.5.5?topic=caus-modifying-war-class-loader-mode-using-wsadmin-scripting
 #See: http://setgetweb.com/p/WAS85x/ae/rxml_7libserver.html
 
-myApplication='content-services-graphql'
+myApplication=sys.argv[0]
 
 #Set a reference to the deployment.xml document
-deployments = AdminConfig.getid('/Deployment:content-services-graphql/')
+deployments = AdminConfig.getid('/Deployment:' + myApplication + '/')
 print "deployments of GraphQL: " + deployments
 print
 
@@ -34,14 +34,14 @@ print myModules
 
 #Find the web module and set the mode for the class loader.
 for module in myModules:
-     if (module.find('content-services-graphql')!= -1):
+     if (module.find(myApplication)!= -1):
         AdminConfig.modify(module, [['classloaderMode', mode1]])
 AdminConfig.save()
 print "verify modification: " + AdminConfig.showall(classLoader) 
 
 #Verify the changes that you made to the attribute value with the showall command.
 for module in myModules:
-     if (module.find('content-services-graphql')!= -1):
+     if (module.find(myApplication )!= -1):
         print AdminConfig.showall(module)
 
 #change WAR class loader policy from 'Class loader for each WAR file in application' to 'Single class loader for application'

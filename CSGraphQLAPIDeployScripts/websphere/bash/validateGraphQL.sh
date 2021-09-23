@@ -24,7 +24,7 @@ PING_OUTPUT=`curl -X GET --header "Accept-Language:${acceptLanguage}" --header '
 echo "Ping Output: " "$PING_OUTPUT"
 if [[ "$PING_OUTPUT" == *"Return Code=200"* ]]; then
   echo "Successfully pinged GraphQL service"
-  return 0
+  exit 0
 else
   exit 1
 fi

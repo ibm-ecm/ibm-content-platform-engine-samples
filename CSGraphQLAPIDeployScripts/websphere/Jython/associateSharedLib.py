@@ -7,7 +7,7 @@
 # */
 libName = sys.argv[0]
 if (libName == ""):
-	libName = 'CPE 557 Client Libs'
+	libName = 'CPE Client Libs'
 	print 'No libName passed in, default to ' + libName
 
 

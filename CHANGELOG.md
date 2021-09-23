@@ -2,7 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [Unreleased] - 2021-09-23
+
+### Changed
+- Updated the [scripts](CSGraphQLAPIDeployScripts) to deploy the Content Services GraphQL API
+  application on a traditional WebSphere Application Server.
+  - Changed GraphQL application name to be a parameter
+  - Changed suggest folder paths in sample properties file
+  - Added changes to support deploying GraphQL application in the same
+    WAS profile as CPE
+  - Renamed "CPE Client Libs" shared library to remove CPE version number
 
 
 ## [5.5.7.0] - 2021-06-25

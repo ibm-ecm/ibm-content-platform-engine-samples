@@ -17,4 +17,10 @@ if [ "$1" != "" ]; then
 	. "$1"
 	set +a
 fi
-$APPSERVER_BIN_DIR/wsadmin.sh -username $APPSERVER_WAS_USR -password $APPSERVER_WAS_PWD -conntype $APPSERVER_CONN_TYPE -f $JYTHON_DIR/setClassloader.py 
+
+#set default if value is not set
+if [[ '$GRAPHQL_APP_NAME' == "" ]]; then
+	GRAPHQL_APP_NAME='content-services-graphql'
+fi
+
+$APPSERVER_BIN_DIR/wsadmin.sh -username $APPSERVER_WAS_USR -password $APPSERVER_WAS_PWD -conntype $APPSERVER_CONN_TYPE -f $JYTHON_DIR/setClassloader.py $GRAPHQL_APP_NAME

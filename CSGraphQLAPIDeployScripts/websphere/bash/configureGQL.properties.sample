@@ -62,7 +62,16 @@ APPSERVER_SVR="REPLACE_WITH_CUSTOM_VALUE"
 			#appserver svr where GraphQL will be installed
 APPSERVER_PROFILE_DIR="REPLACE_WITH_CUSTOM_VALUE"
 			#Ex: /opt/IBM/WebSphere/AppServer/profiles/Default
+			#root dir where to find the keystore and truststore for import and export SSL certificate
+		        #for example: to find keystore to update, script will look for this path
+			#$APPSERVER_PROFILE_DIR/config/cells/$APPSERVER_CELL/nodes/$APPSERVER_NODE/key.p12 
 
+
+IS_GRAPHQL_COLOCATE_WITH_CPE=false
+                        # Boolean,value is either true or false (note: value is case-sensitive lower case true/false)
+			# if this flag is set to true, then will skip the LDAP configuration and 
+			# import of LTPA token into the GraphQL appserver since GraphQL is colocated
+			# in the same server as CPE
 
 #------------------------------------------------------------------------------
 # Env vars needed by configuring Federated LDAP
@@ -143,6 +152,11 @@ LDAP_DOMAIN_NOT_SET="REPLACE_WITH_CUSTOM_VALUE"
 #------------------------------------------------------------------------------
 SSO_DOMAIN="REPLACE_WITH_CUSTOM_VALUE"	
 			#Single sign-on domain
+			#If value is set to "", then enableSSO step is skipped.
+			#	this step can be skipped if GraphQL is collocated
+			#       with CPE. 
+			#Else, extract this value from CPE appserver > Security >
+			#     Global Security > Web and SIP Security > SSO > Domain Name  
 			#Ex: mydomain.com				
 
 
@@ -153,7 +167,10 @@ SSO_DOMAIN="REPLACE_WITH_CUSTOM_VALUE"
 # Prereq: CPE server is already set up and ltpa key is exported. 
 #------------------------------------------------------------------------------
 LTPA_INTERMEDIATE_FILE="REPLACE_WITH_CUSTOM_VALUE"	
-			#path to find the cpe exported ltpa keys
+			#If this env is set to "", then import LTPA step will be skipped.
+			#  For example, if GraphQL is collocated with CPE,
+			#  set this value to "".
+			#Else, path to find the cpe exported ltpa keys
 			#Ex: /tmp/cpe_LTPA.key
 LTPA_PWD="REPLACE_WITH_CUSTOM_VALUE"
 			#pwd to decrypt cpe ltpa key
@@ -161,6 +178,8 @@ LTPA_PWD="REPLACE_WITH_CUSTOM_VALUE"
 #------------------------------------------------------------------------------
 # Env vars needed by addTrustedRealms - 
 # separated trusted realm with '|', for example "vcpe:389 | realm2 | realm3"
+# Extract this value from CPE appserver, Security > Global Security > Federated repositories > Configure > Trusted authentication realms - inbound
+# Value is ignored if IS_GRAPHQL_COLOCATE_WITH_CPE = true since it is expected that CPE is already configured with incoming trusted realms. 
 #------------------------------------------------------------------------------
 INBOUND_REALMS_TRUSTED="REPLACE_WITH_CUSTOM_VALUE"
 					#Realm(s) trusted
@@ -172,12 +191,12 @@ INBOUND_REALMS_TRUSTED="REPLACE_WITH_CUSTOM_VALUE"
 CONTENT_GRAPH_API_WAR_PATH="REPLACE_WITH_CUSTOM_VALUE"  	
 					#Path to find content-graphql-api.war
 					#Script will install this war file into the appserver
-					#Ex: /tmp/content-graphql-api.war
-					#This example shows that content-graph-api.war is downloaded to /tmp.
+					#Ex: /opt/IBM/FileNet/CEClient/lib/content-graphql-api.war
+					#This example shows that content-graph-api.war is downloaded to /opt/IBM/FileNet/CEClient/lib.
 UPDATE_WAR="REPLACE_WITH_CUSTOM_VALUE"      
 					#true/false value.
-					#true: allow to update war installed war.   					
-					#false: installation if there is already a war file in the destination
+					#true: allow to update the installed war.   					
+					#false: skip installation if there is already a war file in the destination
 GRAPHQL_APP_NAME="REPLACE_WITH_CUSTOM_VALUE"
 					#the name of the installed or deployed application. The application name must be 
 					#unique among all the applications within a cell. You cannot specify the same name 
@@ -194,10 +213,10 @@ GRAPHQL_APP_NAME="REPLACE_WITH_CUSTOM_VALUE"
 JACE_JAR_FILE_PATH="REPLACE_WITH_CUSTOM_VALUE"
 			#Path to find Jace.jar. This path MUST exist at runtime since the
 			#Jace.jar library will be loaded from here.
-			#Ex: /tmp/Jace.jar
-			#This example shows that Jace.jar in downloaded to /tmp.
-JACE_JAR_SYMBOLIC_NAME="CPE 557 Client Libs"		
-			#Leave this value as is for 557 release and update if pick up a 
+			#Ex: /opt/IBM/FileNet/CEClient/lib/Jace.jar
+			#This example shows that Jace.jar in downloaded to /opt/IBM/FileNet/CEClient/lib.
+JACE_JAR_SYMBOLIC_NAME="CPE Client Libs"		
+			#Leave this value as is. Use it to lookup if need to upgrade to a 
 			#different version of Jace.jar
 
 

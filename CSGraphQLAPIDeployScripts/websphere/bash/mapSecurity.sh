@@ -10,6 +10,10 @@
 #uncomment set -e if want script to continue on error. Else, default to stop at 1st error
 set -e
 
+#set default
+GRAPH_APP_NAME="content-services-graphql"
+
+#override by arg
 if [ "$1" != "" ]; then
         set -a 
         . "$1"
@@ -17,6 +21,5 @@ if [ "$1" != "" ]; then
 fi
 
 
-
-$APPSERVER_BIN_DIR/wsadmin.sh -username $APPSERVER_WAS_USR -password $APPSERVER_WAS_PWD -conntype $APPSERVER_CONN_TYPE -f $JYTHON_DIR/mapSecurity.py 
+$APPSERVER_BIN_DIR/wsadmin.sh -username $APPSERVER_WAS_USR -password $APPSERVER_WAS_PWD -conntype $APPSERVER_CONN_TYPE -f $JYTHON_DIR/mapSecurity.py  $GRAPHQL_APP_NAME
 
