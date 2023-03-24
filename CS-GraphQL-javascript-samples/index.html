@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="config.js"></script>
+    <script src="app.js" type="text/javascript"> </script>
+    <script src="graphQL.js" type="text/javascript"></script>
+    <script src="dataHandler.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Javascript Sample</h1>
+
+    <div>
+        <form>
+            <label for="doc_operation">Operations:</label>
+            <select id="doc_operation">
+                <option value="">Select</option>
+                <option value="ping">Access ping page and fetch xsrf token</option>
+                <option value="fetch_api">Fetch API</option>
+                <option value="create_folder">Create folder and sub-folders</option>
+                <option value="create_doc">Create document</option>
+                <option value="create_content_doc">Create document with content</option>
+                <option value="delete_doc">Delete document</option>
+                <option value="download_doc">Download document with content</option>
+                <option value="checkinminor_doc">Check-In document as a Minor version</option>
+                <option value="checkinmajor_doc">Check-In document as a Major version</option>
+                <option value="checkout_doc">Check-out document</option>
+                <option value="cancel_checkout">Cancel Check-out</option>
+                <option value="add_doc">Add/file documents into folder</option>
+                <option value="search_doc">Search documents</option>
+                <!--option value="search_folder">Folder navigation/search for folder containees </option!-->
+                <option value="search_with_join">Documents where search criteria involves multiple joined classes
+                </option>
+                <option value="list_meta_cd">Retrieving metadata - classDescription</option>
+                <!--option value="list_sub_cd">Retrieving subclasses of a certain class</option!-->
+                <option value="list_domain_os">Retrieving a domain and its object stores</option>
+                <option value="list_subClass_propDesc">Retrieving a class description & all its subclasses property
+                    descriptions</option>
+                <option value="get_total_count_of_ObjectSearch">Getting total count of Object Search</option>
+                <option value="update_permissions">Update permissions</option>
+                <option value="multiple_repository_object_searches">Multiple Repository Object Searches</option>
+                <!-- <option value="updating_custom_single_value">Update custom single value</option> -->
+                <!-- <option value="generic_mutations_with_dependent_objects">Generic mutations with dependent objects</option> -->
+            </select>
+            <label for="object_store_name">Object Store Name </label>
+            <input type="text" id="object_store_name" name="object_store_name"></input>
+
+            <label for="endpoint">GraphQL EndPoint:</label>
+            <input type="text" id="endpoint" name="endpoint"
+                placeholder="Ex: http://myserver.ibm.com:8182/content-services-graphql"></input>
+
+            <label for="endpoint">Username:</label>
+            <input type="text" id="username" name="username>"></input>
+
+            <label for="password">Password:</label>
+            <input type="text" id="password" name="password"></input>
+
+            <label for="file_id">Identifier (For Document Checks/Downloads):</label>
+            <input type="text" id="file_id" name="file_id>"></input>
+
+            <label for="xsrf_token">ECM-CS-XSRF-Token:</label>
+            <input type="text" id="xsrf_token" name="xsrf_token"></input>
+
+            <input type="button" class="button" value="Execute" onclick="getForm()">
+        </form>
+    </div>
+
+    <div id="graphql_req_body">
+
+    </div>
+
+    <pre id="demo" style="border: 1px solid grey;margin-top: 10px; padding-left: 10px;">
+</pre>
+
+</body>
+
+</html>

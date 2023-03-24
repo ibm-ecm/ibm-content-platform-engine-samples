@@ -10,6 +10,8 @@ Here are a list of sample projects in this repository:
     - The Content Event Webhook Receiver sample application project contains code for creating a sample application that can be used as a Content Event Webhook Receiver. The application can be used as the base or inspiration for creating a custom Content Event Webhook Receiver application. The code for the sample application also contains examples of how to call the Content Services GraphQL API to retrieve data and make changes on a Content Platform Engine object store.
   - [**Content Services GraphQL API Deploy Scripts**](CSGraphQLAPIDeployScripts/websphere)
     - The Content Services GraphQL API Deploy Scripts project contains a set of instructions and scripts to help deploy the Content Services GraphQL API application on a traditional WebSphere Application Server.
+  - [**Content Services GraphQL API Javascript Sample Application**](CS-GraphQL-javascript-samples)
+    - The Content Services GraphQL API Javascript Sample Application contains a sample Javascript WebApplication to demonstrate basic communication with GraphQL API. This code demonstrates how to leverage GraphQL API to communicate and manipulate Content Platform Engine Object Store, and is intended for usage as inspiration and or base for custom applications.
 
 ## License, Authors, and Change Log
 
@@ -20,7 +22,7 @@ If you would like to see the list of maintainers/authors for each sample click [
 If you would like to see the detailed list of changes on this repository [here](CHANGELOG.md).
 
 ```text
-Licensed Materials - Property of IBM (c) Copyright IBM Corp. 2019 - 2021 All Rights Reserved.
+Licensed Materials - Property of IBM (c) Copyright IBM Corp. 2019,2023 All Rights Reserved.
 
 US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with
 IBM Corp.
