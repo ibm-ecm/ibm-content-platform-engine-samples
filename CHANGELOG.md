@@ -2,13 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - 2023-03-24
+## [Unreleased]
+
+
+## [5.5.11] - 2023-06-23
 
 ### Added
 - Added the [Content Services GraphQL API Javascript Sample Application project](CS-GraphQL-javascript-samples).
 
 ### Changed
-- Updated [LICENSE](LICENSE) to IBM FileNet Content Manager v5.5.10.
+- Updated [LICENSE](LICENSE) to IBM FileNet Content Manager v5.5.11.
 
 
 ## [5.5.8.0] - 2021-12-16
@@ -43,7 +46,8 @@ All notable changes to this project will be documented in this file.
 - Added [Javadoc](https://ibm-ecm.github.io/ibm-content-platform-engine-samples/ContentEventWebhookReceiver/) for the Content Event Webhook Receiver sample application project to the [docs](docs) folder
 - Enabled [Github Pages](https://pages.github.com/) on the samples repository.
 
-[unreleased]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/compare/v5.5.8.0...HEAD
+[unreleased]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/compare/v5.5.11.0...HEAD
+[5.5.11.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.5.11.0
 [5.5.8.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.5.8.0
 [5.5.7.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.5.7.0
 [5.5.4.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.5.4.0
