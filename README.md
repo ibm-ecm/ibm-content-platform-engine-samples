@@ -8,6 +8,16 @@ This repository contains various samples that can be used to extend Content Plat
 Here are a list of sample projects in this repository:
   - [**Content Event Webhook Receiver sample application**](ContentEventWebhookReceiver)
     - The Content Event Webhook Receiver sample application project contains code for creating a sample application that can be used as a Content Event Webhook Receiver. The application can be used as the base or inspiration for creating a custom Content Event Webhook Receiver application. The code for the sample application also contains examples of how to call the Content Services GraphQL API to retrieve data and make changes on a Content Platform Engine object store.
+  - [**Content Services on Amazon Web Services sample applications**](CSAWS), including the following
+  [sub-projects for working with API keys/APIC tokens](CSAWS/API-key):
+    - [CE .NET API code sample using OAUTH authentication via APIC CEWS endpoint](CSAWS/API-key/CE-dotNET-API-key)
+      - Sample application for how to connect to Content Services on AWS with the Content Engine .NET API using OAuth authentication via API Connect tokens.
+    - [Content Engine Java API sample application for API keys in a Content Services on AWS environment](CSAWS/API-key/cejavaapikey)
+      - The Content Engine Java API sample application for API keys in a Content Services on AWS environment project contains sample Java code for how to connect to Content Services on AWS with the Content Engine Java API using OAuth authentication via API Connect tokens.
+    - [GraphQL client using API key Java sample application](CSAWS/API-key/CS-GraphQL-API-key-Java)
+      - The GraphQL client using API key Java sample application project contains sample Java code for how to make calls with the Content Services GraphQL API using OAuth authentication via API Connect tokens.
+    - [GraphQL client using API key Python sample application](CSAWS/API-key/CS-GraphQL-API-key-Python)
+      - The raphQL client using API key Python sample application project contains sample Python code for how to make calls with the Content Services GraphQL API using OAuth authentication via API Connect tokens.
   - [**Content Services GraphQL API Deploy Scripts**](CSGraphQLAPIDeployScripts/websphere)
     - The Content Services GraphQL API Deploy Scripts project contains a set of instructions and scripts to help deploy the Content Services GraphQL API application on a traditional WebSphere Application Server.
   - [**Content Services GraphQL API Javascript Sample Application**](CS-GraphQL-javascript-samples)

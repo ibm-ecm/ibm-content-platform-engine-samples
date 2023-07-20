@@ -1,0 +1,41 @@
+plugins {
+    // Apply the java plugin to add support for Java
+    id 'java'
+
+    // Apply the eclipse plugin to add support for building an eclipse project
+    id 'eclipse'
+}
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+}
+
+dependencies {
+   
+    // Libraries to include in application
+    implementation 'org.json:json:20180813'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.9'
+
+}
+
+jar {
+
+    version = ''
+    baseName = 'graphql-java-sample-client'
+    manifest {
+        attributes("Specification-Title": "GraphQL Sample Java Client Using API Key",
+                   "Specification-Version": "5.5.x.0",
+                   "Specification-Vendor": "IBM Corporation",
+                   "Implementation-Title": "GraphQL Sample Java Client Using API Key",
+                   "Implementation-Version": "5.5.x.0",
+                   "Implementation-Vendor": "IBM Corporation",
+                   "Build-Date": new java.text.SimpleDateFormat("yyyy.MMMMM.dd hh:mm:ss aaa").format(new Date()),
+                   "Copyright": "Copyright IBM Corp. 2023  All rights reserved",
+                   "Permissions": "all-permissions",
+                   "Codebase": "*")
+    }
+   from 'src' include  '**/*.*'
+}
+
+defaultTasks 'jar'

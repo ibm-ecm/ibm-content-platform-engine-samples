@@ -1,0 +1,14 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+   mavenCentral()
+}
+
+dependencies {
+   implementation 'javax.json:javax.json-api:1.0'
+   implementation files("libs/jace-5.5.10-0-final.jar", "libs/icnjson.jar") 
+   implementation 'org.apache.httpcomponents:httpclient:4.5.14'
+   implementation 'org.json:json:20230618'
+}

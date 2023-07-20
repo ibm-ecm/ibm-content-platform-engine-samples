@@ -2,10 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [Unreleased] - 2023-07-19
+
+### Added
+- Added the [Content Services on Amazon Web Services sample applications](CSAWS), including the
+  following [sub-projects for working with API keys/APIC tokens](CSAWS/API-key):
+  - [CE .NET API code sample using OAUTH authentication via APIC CEWS endpoint](CSAWS/API-key/CE-dotNET-API-key)
+  - [Content Engine Java API sample application for API keys in a Content Services on AWS environment](CSAWS/API-key/cejavaapikey)
+  - [GraphQL client using API key Java sample application](CSAWS/API-key/CS-GraphQL-API-key-Java)
+  - [GraphQL client using API key Python sample application](CSAWS/API-key/CS-GraphQL-API-key-Python)
 
 
-## [5.5.11] - 2023-06-23
+## [5.5.11.0] - 2023-06-23
 
 ### Added
 - Added the [Content Services GraphQL API Javascript Sample Application project](CS-GraphQL-javascript-samples).

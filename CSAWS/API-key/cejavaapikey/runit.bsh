@@ -1,0 +1,3 @@
+java -cp "build/libs/cejavaapikey.jar:libs/*" cejavaapikey.CEjavaAPIkey
+
+
