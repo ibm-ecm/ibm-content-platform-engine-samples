@@ -37,5 +37,5 @@ SERVICE_USER_API_KEY = 'REPLACE' # Generated API Key for Service ID
 
 #Change variables in this block to match with folder or file to upload
 #---------------------------------------------------------------------------------#
-UPLOAD_PATH = 'REPLACE' # Folder/File upload path
+FILE_PATH = 'REPLACE' # Folder/File upload path
 #---------------------------------------------------------------------------------#
