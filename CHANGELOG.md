@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - 2023-07-19
+## [Unreleased] - 2023-08-17
 
 ### Added
 - Added the [Content Services on Amazon Web Services sample applications](CSAWS), including the
