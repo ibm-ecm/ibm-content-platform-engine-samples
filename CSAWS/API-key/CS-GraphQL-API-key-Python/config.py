@@ -21,7 +21,7 @@
 
 #Change variables in this block to match with GQL system
 #---------------------------------------------------------------------------------#
-GQL_URL = 'REPLACE' # ${InstanceName}.content.automation.ibm.com/content-services-graphql/graphql
+GQL_URL = 'REPLACE' # https://api-9o4.us-east-a.apiconnect.ibmappdomain.cloud/ibmcontentservices/csprod/${InstanceName}/content-services-graphql/graphql
 OS_NAME = 'REPLACE' # ObjectStore Name
 #---------------------------------------------------------------------------------#
 
