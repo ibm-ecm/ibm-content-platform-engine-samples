@@ -2,7 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - 2023-08-17
+## [Unreleased]
+
+
+## [5.5.12.0] - 2023-12-15
 
 ### Added
 - Added the [Content Services on Amazon Web Services sample applications](CSAWS), including the
@@ -11,6 +14,10 @@ All notable changes to this project will be documented in this file.
   - [Content Engine Java API sample application for API keys in a Content Services on AWS environment](CSAWS/API-key/cejavaapikey)
   - [GraphQL client using API key Java sample application](CSAWS/API-key/CS-GraphQL-API-key-Java)
   - [GraphQL client using API key Python sample application](CSAWS/API-key/CS-GraphQL-API-key-Python)
+- Added the [**Content Services Metadata Deployment Sample Application**](CS-MetadataDeployment).
+
+### Changed
+- Updated [LICENSE](LICENSE) to IBM FileNet Content Manager v5.5.12.
 
 
 ## [5.5.11.0] - 2023-06-23
@@ -54,7 +61,8 @@ All notable changes to this project will be documented in this file.
 - Added [Javadoc](https://ibm-ecm.github.io/ibm-content-platform-engine-samples/ContentEventWebhookReceiver/) for the Content Event Webhook Receiver sample application project to the [docs](docs) folder
 - Enabled [Github Pages](https://pages.github.com/) on the samples repository.
 
-[unreleased]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/compare/v5.5.11.0...HEAD
+[unreleased]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/compare/v5.5.12.0...HEAD
+[5.5.12.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.5.12.0
 [5.5.11.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.5.11.0
 [5.5.8.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.5.8.0
 [5.5.7.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.5.7.0
