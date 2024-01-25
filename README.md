@@ -24,6 +24,9 @@ Here are a list of sample projects in this repository:
     - The Content Services GraphQL API Javascript Sample Application contains a sample Javascript WebApplication to demonstrate basic communication with GraphQL API. This code demonstrates how to leverage GraphQL API to communicate and manipulate Content Platform Engine Object Store, and is intended for usage as inspiration and or base for custom applications.
   - [**Content Services Metadata Deployment Sample Application**](CS-MetadataDeployment)
     - The Content Services GraphQL API Javascript Sample Application contains a sample that demonstrates usage of Python to invoke Content Services GraphQL API to deploy metadata such as Property Templates, Choices Lists, and Class Definitions across Content Platform Engine (CPE) Object Stores (OS) – export from source CPE domain/OS then import into target CPE domain/OS.
+  - [**Content Validation with ClamAV sample application**](ClamAVContentValidator)
+    - The Content validation with ClamAV sample contains code for a content validator which utilises the ClamAV service to virus-check incoming content.
+    
 Features demonstrated in the sample:
 
 ## License, Authors, and Change Log
@@ -35,7 +38,7 @@ If you would like to see the list of maintainers/authors for each sample click [
 If you would like to see the detailed list of changes on this repository [here](CHANGELOG.md).
 
 ```text
-Licensed Materials - Property of IBM (c) Copyright IBM Corp. 2019,2023 All Rights Reserved.
+Licensed Materials - Property of IBM (c) Copyright IBM Corp. 2019,2024 All Rights Reserved.
 
 US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with
 IBM Corp.

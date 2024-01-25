@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [Unreleased] - 2024-01-25
+
+### Added
+- Added the [Content Validation with ClamAV sample application project](ClamAVContentValidator).
+
+### Changed
+- Updated copyright date to 2024.
 
 
 ## [5.5.12.0] - 2023-12-15
