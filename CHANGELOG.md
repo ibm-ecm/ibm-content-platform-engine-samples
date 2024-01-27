@@ -2,12 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - 2024-01-25
+## [Unreleased] - 2024-01-26
 
 ### Added
 - Added the [Content Validation with ClamAV sample application project](ClamAVContentValidator).
 
 ### Changed
+- Updated [Content Services GraphQL API Javascript Sample Application](CS-GraphQL-javascript-samples) to add upload document with streaming.
 - Updated copyright date to 2024.
 
 

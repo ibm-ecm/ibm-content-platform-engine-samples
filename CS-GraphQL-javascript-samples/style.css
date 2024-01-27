@@ -1,11 +1,6 @@
-/* .container {
-    display: flex;
-    align-items: flex-start;
+#demo {
+    overflow: auto;
 }
-.dd{
-    height: 15px;
-    width: 120px;
-} */
 
 input[type=text], select{
     width: 100%;
@@ -15,7 +10,34 @@ input[type=text], select{
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    cursor: pointer
+    cursor: pointer;
+}
+input[type=file]{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 12px 0;
+    display: inline-block;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+     box-sizing: border-box;
+    cursor: pointer;
+    display: none;
+}
+label[for=file]{
+    display: none;
+}
+label[for=jwt_token]{
+    display: none;
+}
+input[id=jwt_token]{
+    display: none;
+}
+
+label[for=jwt_slider]{
+    text-align: center;
+    display: inline-block;
+    padding-bottom: 25px;
 }
 
 input[type=button]:hover{
@@ -47,9 +69,60 @@ div {
     background-color: #f2f2f2;
     padding: 20px;
 }
-/* textarea {
-    resize: none;
-    height: 13px;
-    width: 700x;
-    vertical-align: top;
-} */
+
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 53px;
+    height: 25px;
+  }
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 25px;
+
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+
+}
+
+input:checked + .slider {
+    background-color: rgb(53, 53, 240);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px rgb(53, 53, 240);
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}

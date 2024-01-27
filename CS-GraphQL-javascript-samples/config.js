@@ -1,5 +1,5 @@
 /*
-  Licensed Materials - Property of IBM (c) Copyright IBM Corp. 2019,2023 All Rights Reserved.
+  Licensed Materials - Property of IBM (c) Copyright IBM Corp. 2019,2024 All Rights Reserved.
 
   US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with
   IBM Corp.
@@ -24,7 +24,29 @@ var appConfig = {
   username: "",
   password: "",
   os: "",
-  debug: "false",
   fileId: "",
   xsrfToken: "",
+  jwtToken: ""
 };
+
+function setGraphQLEndPoint(url){
+  appConfig.graphql=url;
+}
+function setUserName(user){
+  appConfig.username=user;
+}
+function setPassword(pass){
+  appConfig.password=pass
+}
+function setObjectStore(objectStore){
+  appConfig.os=objectStore;
+}
+function setFileId(id){
+  appConfig.fileId=id;
+}
+function setXSRFToken(token){
+  appConfig.xsrfToken=token;
+}
+function setJwtToken(token){
+  appConfig.jwtToken=token;
+}

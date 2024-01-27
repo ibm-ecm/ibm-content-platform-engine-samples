@@ -4,6 +4,7 @@ Javascript snippet for different document/folder operations using CS graphQL API
 Examples of foundation operations include:<br/>
 - Create document<br/>
 - Download document with content<br/>
+- Upload document with content<br/>
 - Check-out/Check-in document<br/>
 - Create folder and sub-folders<br/>
 - Add/file documents into folder<br/>
