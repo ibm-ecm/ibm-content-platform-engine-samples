@@ -5,6 +5,8 @@ Examples of foundation operations include:<br/>
 - Create document<br/>
 - Download document with content<br/>
 - Upload document with content<br/>
+   - Traditional content upload 
+   - Content streaming upload
 - Check-out/Check-in document<br/>
 - Create folder and sub-folders<br/>
 - Add/file documents into folder<br/>
