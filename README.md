@@ -17,7 +17,9 @@ Here are a list of sample projects in this repository:
     - [GraphQL client using API key Java sample application](CSAWS/API-key/CS-GraphQL-API-key-Java)
       - The GraphQL client using API key Java sample application project contains sample Java code for how to make calls with the Content Services GraphQL API using OAuth authentication via API Connect tokens.
     - [GraphQL client using API key Python sample application](CSAWS/API-key/CS-GraphQL-API-key-Python)
-      - The raphQL client using API key Python sample application project contains sample Python code for how to make calls with the Content Services GraphQL API using OAuth authentication via API Connect tokens.
+      - The GraphQL client using API key Python sample application project contains sample Python code for how to make calls with the Content Services GraphQL API using OAuth authentication via API Connect tokens.
+  - [**Content Services GraphQL API Schema**](CS-GraphQL-Schema)
+      - The Content Services GraphQL API Schema project contains the GraphQL Schema file that defines the schema of the Content Services GraphQL API.
   - [**Content Services GraphQL API Deploy Scripts**](CSGraphQLAPIDeployScripts/websphere)
     - The Content Services GraphQL API Deploy Scripts project contains a set of instructions and scripts to help deploy the Content Services GraphQL API application on a traditional WebSphere Application Server.
   - [**Content Services GraphQL API Javascript Sample Application**](CS-GraphQL-javascript-samples)
