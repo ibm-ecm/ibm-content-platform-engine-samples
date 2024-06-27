@@ -2,14 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - 2024-02-07
+## [Unreleased]
+
+
+## [5.6.0.0] - 2024-06-28
 
 ### Added
 - Added the [Content Validation with ClamAV sample application project](ClamAVContentValidator).
+- Added the [Content Services GraphQL API Schema project](CS-GraphQL-Schema) with the schema for FNCM 5.6.0.
 
 ### Changed
 - Updated [Content Services GraphQL API Javascript Sample Application](CS-GraphQL-javascript-samples) to add upload document with streaming.
+- Renamed the [Content Services Metadata Deployment Sample Application project](CS-MetadataDeployment) to the [Content Services Deployment API project](CS-Deployment-API).
+- Moved Jupyter notebooks of the old project from the folder [CS-MetadataDeployment](CS-MetadataDeployment) to the folder [CS-Deployment-API](CS-Deployment-API).
+- Removed the old [Deployment API samples](CS-MetadataDeployment). Users can now use the new Content Services Deployment API package included in FNCM 5.6.0 installation media instead of the old sample project.
+- Updated the project to use the new CS GraphQL APIs from FNCM 5.6.0 and reorganized the Jupyter notebooks.
 - Updated copyright date to 2024.
+- Updated [LICENSE](LICENSE) to IBM FileNet Content Manager v5.6.0.
 
 
 ## [5.5.12.0] - 2023-12-15
@@ -68,7 +77,8 @@ All notable changes to this project will be documented in this file.
 - Added [Javadoc](https://ibm-ecm.github.io/ibm-content-platform-engine-samples/ContentEventWebhookReceiver/) for the Content Event Webhook Receiver sample application project to the [docs](docs) folder
 - Enabled [Github Pages](https://pages.github.com/) on the samples repository.
 
-[unreleased]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/compare/v5.5.12.0...HEAD
+[unreleased]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/compare/v5.6.0.0...HEAD
+[5.5.12.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.6.0.0
 [5.5.12.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.5.12.0
 [5.5.11.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.5.11.0
 [5.5.8.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.5.8.0
