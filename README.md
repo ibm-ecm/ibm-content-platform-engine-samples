@@ -24,8 +24,8 @@ Here are a list of sample projects in this repository:
     - The Content Services GraphQL API Deploy Scripts project contains a set of instructions and scripts to help deploy the Content Services GraphQL API application on a traditional WebSphere Application Server.
   - [**Content Services GraphQL API Javascript Sample Application**](CS-GraphQL-javascript-samples)
     - The Content Services GraphQL API Javascript Sample Application contains a sample Javascript WebApplication to demonstrate basic communication with GraphQL API. This code demonstrates how to leverage GraphQL API to communicate and manipulate Content Platform Engine Object Store, and is intended for usage as inspiration and or base for custom applications.
-  - [**Content Services Metadata Deployment Sample Application**](CS-MetadataDeployment)
-    - The Content Services GraphQL API Javascript Sample Application contains a sample that demonstrates usage of Python to invoke Content Services GraphQL API to deploy metadata such as Property Templates, Choices Lists, and Class Definitions across Content Platform Engine (CPE) Object Stores (OS) – export from source CPE domain/OS then import into target CPE domain/OS.
+  - [**Content Services Deployment API**](CS-Deployment-API)
+    - The Content Services Deployment API project contains a sample that demonstrates usage of Jupyter Notebook to invoke Content Services Deployment API to deploy metadata such as Property Templates, Choices Lists, and Class Definitions across Content Platform Engine (CPE) Object Stores (OS) – export from source CPE domain/OS then import into destination CPE domain/OS.
   - [**Content Validation with ClamAV sample application**](ClamAVContentValidator)
     - The Content validation with ClamAV sample contains code for a content validator which utilises the ClamAV service to virus-check incoming content.
     
