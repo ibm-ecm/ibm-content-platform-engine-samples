@@ -2,7 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [Unreleased] - 2024-07-25
+
+### Changed
+- Updated [ClamAV.zip](ClamAVContentValidator/files/ClamAV.zip) in the [Content Validation with ClamAV sample application project](ClamAVContentValidator) to fix an inconsistency in the `Main-Class` attribute for the MANIFEST.MF file in ClamAV.jar.
 
 
 ## [5.6.0.0] - 2024-06-28
@@ -78,7 +81,7 @@ All notable changes to this project will be documented in this file.
 - Enabled [Github Pages](https://pages.github.com/) on the samples repository.
 
 [unreleased]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/compare/v5.6.0.0...HEAD
-[5.5.12.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.6.0.0
+[5.6.0.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.6.0.0
 [5.5.12.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.5.12.0
 [5.5.11.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.5.11.0
 [5.5.8.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.5.8.0
