@@ -2,7 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - 2024-07-25
+## [Unreleased] - 2024-08-20
+
+### Added
+- Added [.secrets.baseline](.secrets.baseline) for detect-secrets
 
 ### Changed
 - Updated [ClamAV.zip](ClamAVContentValidator/files/ClamAV.zip) in the [Content Validation with ClamAV sample application project](ClamAVContentValidator) to fix an inconsistency in the `Main-Class` attribute for the MANIFEST.MF file in ClamAV.jar.
