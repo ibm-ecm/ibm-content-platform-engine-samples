@@ -2,13 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - 2024-08-20
+## [Unreleased] - 2024-11-01
 
 ### Added
 - Added [.secrets.baseline](.secrets.baseline) for detect-secrets
+- Added missing deploy_select_cd.ipynb
 
 ### Changed
 - Updated [ClamAV.zip](ClamAVContentValidator/files/ClamAV.zip) in the [Content Validation with ClamAV sample application project](ClamAVContentValidator) to fix an inconsistency in the `Main-Class` attribute for the MANIFEST.MF file in ClamAV.jar.
+- Updated [deploy_select_cd.ipynb](CS-Deployment-API/deploy_select_cd.ipynb) to remove default ssl_enabled flag in basic target_connection.
+- Updated [README.md] to add potential ways to launch notebook for Windows OS via command line.
 
 
 ## [5.6.0.0] - 2024-06-28

@@ -36,8 +36,8 @@ Before using this program, make sure to edit ``config.py`` to match with the int
 
 To launch any of the demo notebook, you can do the following from directory containing notebooks:<br>
 - Call deploy_select_cd.ipynb as a jupyter lab launch: <br>
-`jupyter ./deploy_select_cd.ipynb` or `python3 -m jupyter ./deploy_select_cd.ipynb` or `python -m jupyter ./deploy_select_cd.ipynb`
+`jupyter ./deploy_select_cd.ipynb` or `python3 -m jupyter ./deploy_select_cd.ipynb` or `python -m jupyter ./deploy_select_cd.ipynb` or `python -m jupyter notebook deploy_select_cd.ipynb`
 - Call deploy_all_cd.ipynb as a jupyter lab launch: <br>
-`jupyter ./deploy_all_cd.ipynb` or `python3 -m jupyter ./deploy_all_cd.ipynb` or `python -m jupyter ./deploy_all_cd.ipynb`
+`jupyter ./deploy_all_cd.ipynb` or `python3 -m jupyter ./deploy_all_cd.ipynb` or `python -m jupyter ./deploy_all_cd.ipynb` or `python -m jupyter notebook deploy_all_cd.ipynb`
 - Call deploy_all.ipynb as a jupyter lab launch: <br>
-`jupyter ./deploy_all.ipynb` or `python3 -m jupyter ./deploy_all.ipynb` or `python -m jupyter ./deploy_all.ipynb`
+`jupyter ./deploy_all.ipynb` or `python3 -m jupyter ./deploy_all.ipynb` or `python -m jupyter ./deploy_all.ipynb` or `python -m jupyter notebook deploy_all.ipynb`
