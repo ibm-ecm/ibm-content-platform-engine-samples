@@ -13,6 +13,10 @@ All notable changes to this project will be documented in this file.
 - Updated [deploy_select_cd.ipynb](CS-Deployment-API/deploy_select_cd.ipynb) to remove default ssl_enabled flag in basic target_connection.
 - Updated [README.md] to add potential ways to launch notebook for Windows OS via command line.
 
+### Removed
+- Removed the **Content Services on Amazon Web Services sample applications**.
+  - These code samples were specific to the Content Services on Amazon Web Services offering, which has since been discontinued. For sample code on how to use the Content Engine client API to authenticate with an OAuth token, see [Single sign-on integrations via Content Engine API Bearer Token Authentication](https://www.ibm.com/docs/en/filenet-p8-platform/5.6.0?topic=authentication-single-sign-integrations-via-content-engine-api-bearer-token).
+
 
 ## [5.6.0.0] - 2024-06-28
 
