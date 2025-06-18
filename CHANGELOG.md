@@ -2,7 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - 2025-06-20
+## [Unreleased]
+
+
+## [5.7.0.0] - 2025-06-20
 
 ### Added
 - Added [.secrets.baseline](.secrets.baseline) for detect-secrets
@@ -92,7 +95,8 @@ All notable changes to this project will be documented in this file.
 - Added [Javadoc](https://ibm-ecm.github.io/ibm-content-platform-engine-samples/ContentEventWebhookReceiver/) for the Content Event Webhook Receiver sample application project to the [docs](docs) folder
 - Enabled [Github Pages](https://pages.github.com/) on the samples repository.
 
-[unreleased]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/compare/v5.6.0.0...HEAD
+[unreleased]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/compare/v5.7.0.0...HEAD
+[5.7.0.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.7.0.0
 [5.6.0.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.6.0.0
 [5.5.12.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.5.12.0
 [5.5.11.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.5.11.0
