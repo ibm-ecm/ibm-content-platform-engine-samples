@@ -2,12 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - 2025-03-18
+## [Unreleased] - 2025-06-20
 
 ### Added
 - Added [.secrets.baseline](.secrets.baseline) for detect-secrets
 - Added missing deploy_select_cd.ipynb
 - Added [gqlinvoke_content_assistant_samples.ipynb](CS-Deployment-API/gqlinvoke_content_assistant_samples.ipynb).
+- Added [WAS CPE Must Gather Scripts](MustGather).
 
 ### Changed
 - Updated [ClamAV.zip](ClamAVContentValidator/files/ClamAV.zip) in the [Content Validation with ClamAV sample application project](ClamAVContentValidator) to fix an inconsistency in the `Main-Class` attribute for the MANIFEST.MF file in ClamAV.jar.

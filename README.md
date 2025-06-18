@@ -18,6 +18,8 @@ Here are a list of sample projects in this repository:
     - The Content Services Deployment API project contains a sample that demonstrates usage of Jupyter Notebook to invoke Content Services Deployment API to deploy metadata such as Property Templates, Choices Lists, and Class Definitions across Content Platform Engine (CPE) Object Stores (OS) – export from source CPE domain/OS then import into destination CPE domain/OS.
   - [**Content Validation with ClamAV sample application**](ClamAVContentValidator)
     - The Content validation with ClamAV sample contains code for a content validator which utilises the ClamAV service to virus-check incoming content.
+  - [**WAS CPE Must Gather Scripts**](MustGather)
+    - The Content Platform Engine Must Gather scripts for WebSphere Application Server project contains scripts to help collect logs and other necessary debugging information from people using the WebSphere installation of FileNet Content Manager.
     
 Note that the previously available **Content Services on Amazon Web Services sample applications** added in the [CPE 5.5.12 Release](https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.5.12.0) have been removed, as those sample applications were specific for use with Content Services on Amazon Web Services.  The Content Services on Amazon Web Services offering has since been discontinued. However, the Content Platform Engine documentation has sample code to authenticate with an OAuth token. For that sample code, see [Single sign-on integrations via Content Engine API Bearer Token Authentication](https://www.ibm.com/docs/en/filenet-p8-platform/5.6.0?topic=authentication-single-sign-integrations-via-content-engine-api-bearer-token).
 
@@ -30,7 +32,7 @@ If you would like to see the list of maintainers/authors for each sample click [
 If you would like to see the detailed list of changes on this repository [here](CHANGELOG.md).
 
 ```text
-Licensed Materials - Property of IBM (c) Copyright IBM Corp. 2019,2024 All Rights Reserved.
+Licensed Materials - Property of IBM (c) Copyright IBM Corp. 2019,2025 All Rights Reserved.
 
 US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with
 IBM Corp.
