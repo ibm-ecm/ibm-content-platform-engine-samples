@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+## [26.0.0.0] - 2026-06-26
+
+### Added
+- Added the [Text Indexing Preprocessor sample project](TextIndexingPreprocessor).
+
+### Changed
+- Updated [LICENSE](LICENSE) to IBM Content Cortex v26.0.0.
+- Updated references for Content Services to Content Cortex. Also updated references for FileNet Content Manager to IBM Content Cortex.
+
+
 ## [5.7.0.0] - 2025-06-20
 
 ### Added
@@ -17,6 +27,7 @@ All notable changes to this project will be documented in this file.
 - Updated [ClamAV.zip](ClamAVContentValidator/files/ClamAV.zip) in the [Content Validation with ClamAV sample application project](ClamAVContentValidator) to fix an inconsistency in the `Main-Class` attribute for the MANIFEST.MF file in ClamAV.jar.
 - Updated [deploy_select_cd.ipynb](CS-Deployment-API/deploy_select_cd.ipynb) to remove default ssl_enabled flag in basic target_connection.
 - Updated [README.md] to add potential ways to launch notebook for Windows OS via command line.
+- Updated [LICENSE](LICENSE) to IBM FileNet Content Manager v5.7.0.
 
 ### Removed
 - Removed the **Content Services on Amazon Web Services sample applications**.
@@ -95,7 +106,8 @@ All notable changes to this project will be documented in this file.
 - Added [Javadoc](https://ibm-ecm.github.io/ibm-content-platform-engine-samples/ContentEventWebhookReceiver/) for the Content Event Webhook Receiver sample application project to the [docs](docs) folder
 - Enabled [Github Pages](https://pages.github.com/) on the samples repository.
 
-[unreleased]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/compare/v5.7.0.0...HEAD
+[unreleased]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/compare/v26.0.0.0...HEAD
+[26.0.0.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v26.0.0.0
 [5.7.0.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.7.0.0
 [5.6.0.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.6.0.0
 [5.5.12.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.5.12.0

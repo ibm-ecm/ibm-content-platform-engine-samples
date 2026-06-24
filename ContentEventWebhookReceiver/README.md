@@ -1,5 +1,5 @@
 # Content Event Webhook Receiver sample application
-This folder contains code for creating a sample application that can be used as a Content Event Webhook Receiver. The application can be used as the base or inspiration for creating a custom Content Event Webhook Receiver application. The code for the sample application also contains examples of how to call the Content Services GraphQL API to retrieve data and make changes on a Content Platform Engine object store.
+This folder contains code for creating a sample application that can be used as a Content Event Webhook Receiver. The application can be used as the base or inspiration for creating a custom Content Event Webhook Receiver application. The code for the sample application also contains examples of how to call the Content Cortex GraphQL API to retrieve data and make changes on a Content Platform Engine object store.
 
 For more information about Content Event Webhooks, see the developer guide topic [(V5.5.4 and later) Content Platform Engine event webhooks](https://www.ibm.com/support/knowledgecenter/en/SSNW2F_5.5.0/com.ibm.p8.ce.dev.ce.doc/webhooks_concepts.htm).
 
@@ -68,7 +68,7 @@ The sample application has the following structure:
   - [WebhookReceiver](https://ibm-ecm.github.io/ibm-content-platform-engine-samples/ContentEventWebhookReceiver/com/ibm/ecm/sample/webhook/WebhookReceiver.html)
     - This is the main servlet, which handles the logic for the Content Event Webhook Receiver. Whenever the Webhook External Event Action makes a call to the Webhook Receiver on the `/receiver` path of this application, such as when an event is received from the Content Platform Engine server, the `listener` method of this class will process the call. Every time an event is received, the following events occur:
     1. Parse the JSON payload from the Webhook External Event Action call
-    2. Ping the Content Services GraphQL Server
+    2. Ping the Content Cortex GraphQL Server
     3. If the event is a CreationEvent:
        - Retrieve the Webhook Event Action and subscription created when the Receiver application started.
        - Check if the subscription that triggered the callout is associated with the first event action created by the Receiver application.
@@ -83,7 +83,7 @@ The sample application has the following structure:
   - [WebhookReceiverServletContextListener](https://ibm-ecm.github.io/ibm-content-platform-engine-samples/ContentEventWebhookReceiver/com/ibm/ecm/sample/webhook/WebhookReceiverServletContextListener.html)
     - Handles logic for startup and shutdown of the Content Event Webhook Receiver sample application. The startup (`contextInitialized`) handles setup of the Webhook External Event Action and it subscriptions, while the shutdown (`contextDestroyed`) handles the teardown and cleanup of the event action and subscription that was created, as well as any documents that are created as a part of driving the example.
     - When the application starts up, the following events occur:
-      1. Ping the Content Services GraphQL Server.
+      1. Ping the Content Cortex GraphQL Server.
       2. Create the Webhook External Event Action and subscription. Initially, this event action and subscription is subscribed to the CreationEvent on the *WebhookClaim* class definition. Later, the event action and subscription is modified.
       3. Parse the response from the create call to get the external event action ID for later cleanup.
       4. Retrieve the Webhook External event Action and subscription to get the subscription ID. (Note: The previous create call does not return information about the created subscription, which is why it must be fetched again. An alternative to this additional call is to specify an ID for the subscription when creating it.)
@@ -100,9 +100,9 @@ The sample application has the following structure:
   - [Constants](https://ibm-ecm.github.io/ibm-content-platform-engine-samples/ContentEventWebhookReceiver/com/ibm/ecm/sample/webhook/util/Constants.html)
     - General constants for the Content Event Webhook Receiver sample application, including constants to use for the Content Event Webhook External Event Actions and Subscriptions created by this sample application. Also includes constants to use for the key names for `ServletContext` attributes for sharing data across the sample application and the package name to use for logging.
   - [CSServerInfo](https://ibm-ecm.github.io/ibm-content-platform-engine-samples/ContentEventWebhookReceiver/com/ibm/ecm/sample/webhook/util/CSServerInfo.html)
-    - This class is used for handling the Content Services server information, including the GraphQL server URL and login credentials for the user that is used to configure the Content Event Webhook and handle callback requests to process the document that triggered the Webhook's subscription. Make sure to change the information set in [CSServerInfo.properties](src/main/resources/com/ibm/ecm/sample/webhook/util/CSServerInfo.properties) to have the appropriate Content Services GraphQL server URL and Content Platform Engine admin user to use for setting up the Content Event Webhook event action and subscription and callback logic.
+    - This class is used for handling the Content Cortex server information, including the GraphQL server URL and login credentials for the user that is used to configure the Content Event Webhook and handle callback requests to process the document that triggered the Webhook's subscription. Make sure to change the information set in [CSServerInfo.properties](src/main/resources/com/ibm/ecm/sample/webhook/util/CSServerInfo.properties) to have the appropriate Content Cortex GraphQL server URL and Content Platform Engine admin user to use for setting up the Content Event Webhook event action and subscription and callback logic.
   - [GraphQLAPIUtil](https://ibm-ecm.github.io/ibm-content-platform-engine-samples/ContentEventWebhookReceiver/ContentEventWebhookReceiver/com/ibm/ecm/sample/webhook/util/GraphQLAPIUtil.html)
-	- Utility class for handling calls to the Content Services GraphQL API.
+	- Utility class for handling calls to the Content Cortex GraphQL API.
   - [GraphQLCallTemplate](https://ibm-ecm.github.io/ibm-content-platform-engine-samples/ContentEventWebhookReceiver/ContentEventWebhookReceiver/com/ibm/ecm/sample/webhook/util/GraphQLCallTemplate.html)
 	- This class is used for keeping track of templates for various GraphQL calls. See [GraphQLCallTemplate.properties](src/main/resources/com/ibm/ecm/sample/webhook/util/GraphQLCallTemplate.properties) for the GraphQL call templates.
   - [HMACAuthenticationFilter](https://ibm-ecm.github.io/ibm-content-platform-engine-samples/ContentEventWebhookReceiver/com/ibm/ecm/sample/webhook/util/HMACAuthenticationFilter.html)
@@ -117,7 +117,7 @@ The sample application has the following structure:
 ---
 ### Modifying the Webhook Receiver sample application
 
-When using the Webhook Receiver sample application for the first time, make sure to change the information set in [CSServerInfo.properties](src/main/resources/com/ibm/ecm/sample/webhook/util/CSServerInfo.properties) to have the appropriate Content Services GraphQL server URL and Content Platform Engine admin user to use for setting up the Content Event Webhook event action and subscription and callback logic. This file must be customized for the application's target environment in order for the sample aplication to work.
+When using the Webhook Receiver sample application for the first time, make sure to change the information set in [CSServerInfo.properties](src/main/resources/com/ibm/ecm/sample/webhook/util/CSServerInfo.properties) to have the appropriate Content Cortex GraphQL server URL and Content Platform Engine admin user to use for setting up the Content Event Webhook event action and subscription and callback logic. This file must be customized for the application's target environment in order for the sample aplication to work.
 
 You can modify the sample application as needed to implement any required logic. A number of GraphQL calls are included as an example. The logic can be freely modified as necessary to accommodate the specific use case for the webhook. Here are some things of note when customizing the sample application:
 
@@ -165,16 +165,16 @@ This project uses the [Gradle Wrapper](https://docs.gradle.org/current/userguide
 - **Windows**: `gradlew.bat war`
 - **Linux/Mac**: `./gradlew war`
 
-Before building the sample application, change the information set in [CSServerInfo.properties](src/main/resources/com/ibm/ecm/sample/webhook/util/CSServerInfo.properties) to have the appropriate Content Services GraphQL server URL and Content Platform Engine admin user to use for setting up the Content Event Webhook event action and subscription and callback logic. For the sample application to work, you must customize the file for the environment that the application will run in. See [**Modifying the Webhook Receiver sample application**](#modifying-the-webhook-receiver-sample-application) for more information.
+Before building the sample application, change the information set in [CSServerInfo.properties](src/main/resources/com/ibm/ecm/sample/webhook/util/CSServerInfo.properties) to have the appropriate Content Cortex GraphQL server URL and Content Platform Engine admin user to use for setting up the Content Event Webhook event action and subscription and callback logic. For the sample application to work, you must customize the file for the environment that the application will run in. See [**Modifying the Webhook Receiver sample application**](#modifying-the-webhook-receiver-sample-application) for more information.
 
 
 ---
 ### Deploying the Webhook Receiver sample application
-The sample application has been tested only on a WebSphere Liberty server, as the Content Services GraphQL API only supports WebSphere Liberty. 
+The sample application has been tested only on a WebSphere Liberty server, as the Content Cortex GraphQL API only supports WebSphere Liberty. 
 
 To deploy the sample application:
   1. Follow the steps in [**Preparing the Content Platform Engine object store**](#preparing-the-content-platform-engine-object-store).
-  2. Edit [CSServerInfo.properties](src/main/resources/com/ibm/ecm/sample/webhook/util/CSServerInfo.properties) to have the appropriate Content Services GraphQL server URL and Content Platform Engine admin user to use for setting up the Content Event Webhook event action and subscription and callback logic. See the topic [**Modifying the Webhook Receiver sample application**](#modifying-the-webhook-receiver-sample-application) for more information.
+  2. Edit [CSServerInfo.properties](src/main/resources/com/ibm/ecm/sample/webhook/util/CSServerInfo.properties) to have the appropriate Content Cortex GraphQL server URL and Content Platform Engine admin user to use for setting up the Content Event Webhook event action and subscription and callback logic. See the topic [**Modifying the Webhook Receiver sample application**](#modifying-the-webhook-receiver-sample-application) for more information.
   3. If needed, edit [content-event-webhook-receiver.xml](files/content-event-webhook-receiver.xml). See topic [**Modifying the Webhook Receiver sample application**](#modifying-the-webhook-receiver-sample-application) for more information.
   4. Build the sample application.  See topic [**Building the Webhook Receiver sample application**](#building-the-webhook-receiver-sample-application) for more information.
   5. Copy the built WAR file from `build/libs/content-event-webhook-receiver.war` to the Liberty apps directory.

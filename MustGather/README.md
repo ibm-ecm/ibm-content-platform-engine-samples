@@ -2,7 +2,7 @@
 
 # Introduction
 
-This folder contains scripts to help collect logs and other necessary debugging information from people using the WebSphere installation of FileNet Content Manager.
+This folder contains scripts to help collect logs and other necessary debugging information from people using the WebSphere installation of IBM Content Cortex.
 
 There are two different scripts, one for Windows called `windows-script.ps1` written in PowerShell, and one for Linux called `linux-script.sh` written in bash.
 

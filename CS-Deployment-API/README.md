@@ -1,6 +1,6 @@
 # CS-Deployment-API
 # Introduction
-This sample demonstrates the usage of Content Services Deployment Python API to invoke Content Services GraphQL API to deploy of metadata such as Property Templates, Choice Lists, and Class Definitions across Content Platform Engine (CPE) Object Stores (OS) – export from source CPE domain/OS then import into destination CPE domain/OS.
+This sample demonstrates the usage of Content Cortex Deployment Python API to invoke Content Cortex GraphQL API to deploy of metadata such as Property Templates, Choice Lists, and Class Definitions across Content Platform Engine (CPE) Object Stores (OS) – export from source CPE domain/OS then import into destination CPE domain/OS.
 # Features in Sample Notebooks:
 - Export Class Definition(s) and dependencies like Property Template(s) and Choice List(s) for subclasses of system classes such as - Document, Folder, CustomObject, CmAbstractPersistable and Annotation.
 - Export all objects of any or all types in Class Definition(s), Property Template(s) and Choice List(s).

@@ -1,1 +1,1 @@
-# For sample code to deploy ClassDefinitions, PropertyTemplates, and ChoiceLists using Content Services Deployment API, please navigate to public Git URL: [CS-Deployment-API](../CS-Deployment-API/)
+# For sample code to deploy ClassDefinitions, PropertyTemplates, and ChoiceLists using Content Cortex Deployment API, please navigate to public Git URL: [CS-Deployment-API](../CS-Deployment-API/)

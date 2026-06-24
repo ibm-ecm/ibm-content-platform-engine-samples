@@ -2,7 +2,7 @@ WAS CPE Must Gather
 
 
 Introduction
-This folder contains scripts to help collect logs and other necessary debugging information from people using the WebSphere installation of FileNet Content Manager. There are two different scripts, one for Windows called windows-script.ps1 written in PowerShell, and one for Linux called linux-script.sh written in bash. Both use the configuration file config, which will be created if it does not exist.
+This folder contains scripts to help collect logs and other necessary debugging information from people using the WebSphere installation of IBM Content Cortex. There are two different scripts, one for Windows called windows-script.ps1 written in PowerShell, and one for Linux called linux-script.sh written in bash. Both use the configuration file config, which will be created if it does not exist.
 IMPORTANT: Make sure the user running the script has read access to the WebSphere files and write access to the output directory.
 
 

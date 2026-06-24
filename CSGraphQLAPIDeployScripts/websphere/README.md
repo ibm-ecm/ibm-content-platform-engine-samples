@@ -1,16 +1,16 @@
-# Automating deployment of Content Services GraphQL API application on traditional WebSphere Application Server 9.0
+# Automating deployment of Content Cortex GraphQL API application on traditional WebSphere Application Server 9.0
 
 ## General Overview
 
-This document describes how to run a Unix bash script to deploy the Content Services GraphQL (CSGQL) API application on a traditional Websphere Application Server (tWAS) 9.0 environment.
+This document describes how to run a Unix bash script to deploy the Content Cortex GraphQL API (formerly Content Services GraphQL API or CSGQL) application on a traditional Websphere Application Server (tWAS) 9.0 environment.
 
 The limitations for this release are:
 
-*   Scripts are written for the Linux/Unix platform only. If the traditional WebSphere Application Server (tWAS)  for hosting CSGQL is installed on Windows, follow the instructions described in the technical notice (technote) [Deploy Content Services GraphQL API into a traditional WebSphere Application Server environment](https://www.ibm.com/support/pages/node/6459811?_ga=2.146550964.1693779471.1624377485-1906706560.1624377485) to configure and deploy CSGQL manually.
+*   Scripts are written for the Linux/Unix platform only. If the traditional WebSphere Application Server (tWAS)  for hosting Content Cortex GraphQL is installed on Windows, follow the instructions described in the technical notice (technote) [Deploy Content Services GraphQL API into a traditional WebSphere Application Server environment](https://www.ibm.com/support/pages/node/6459811?_ga=2.146550964.1693779471.1624377485-1906706560.1624377485) to configure and deploy CSGQL manually.
 *   Scripts target deployment under a tWAS single application server environment. 
 *   Configuration of OAUTH is outside of the scope of these scripts. The scripts will configure GraphQL to use BASIC authentication with the Content Platform Engine (CPE) server. Information about OAUTH/OIDC configuration between CSGQL and CPE is provided in technical notice (technote) [Deploy Content Services GraphQL API into a traditional WebSphere Application Server environment](https://www.ibm.com/support/pages/node/6459811?_ga=2.146550964.1693779471.1624377485-1906706560.1624377485) .
 
-After running the scripts, you will be able to make a Content Services GraphQL query to a CPE server and see the results of the query.
+After running the scripts, you will be able to make a Content Cortex GraphQL query to a CPE server and see the results of the query.
 
 ## Before you begin
 
@@ -85,7 +85,7 @@ Sample GraphQL query to test the connection to CPE:
 ```
 
 ## Completing the deployment:
-After running the scripts, return to the [technote](https://www.ibm.com/support/pages/node/6459811?_ga=2.146550964.1693779471.1624377485-1906706560.1624377485) and complete the remainder of the procedures starting with the topic "Validate the Configuration". After usage of the Content Services GraphQL API is confirmed, OAuth/OIDC configuration between CS-GraphQL and CPE can be configured manually if desired.
+After running the scripts, return to the [technote](https://www.ibm.com/support/pages/node/6459811?_ga=2.146550964.1693779471.1624377485-1906706560.1624377485) and complete the remainder of the procedures starting with the topic "Validate the Configuration". After usage of the Content Cortex GraphQL API is confirmed, OAuth/OIDC configuration between CS-GraphQL and CPE can be configured manually if desired.
 
 Note the properties file can be modified to enable or disable logging for GraphQL based on the setting of `ENABLE_GQL_DBG` and `ENABLE_LTPA_DBG`. This script is then run to automate the setting of the trace flags if needed for troubleshooting an issue with the deployment.
 
