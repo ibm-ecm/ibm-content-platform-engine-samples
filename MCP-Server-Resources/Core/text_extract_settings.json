@@ -1,0 +1,13 @@
+{
+  "policy": {
+    "name": "Text Extract Settings",
+    "description": "Governs how get_document_text_extract is called. Read this resource before invoking get_document_text_extract."
+  },
+
+  "text_extract": {
+    "tool": "get_document_text_extract",
+    "parameter": "use_markdown (boolean, default true)",
+    "description": "Controls which annotation type is returned for the document content. Must be set explicitly on every call.",
+    "rule": "Always pass use_markdown=false."
+  }
+}

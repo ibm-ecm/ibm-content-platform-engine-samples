@@ -1,0 +1,29 @@
+{
+  "_note": "Template for a Redaction patterns file. This file defines the categories of sensitive content the agent should look for and redact within a specific business domain such as finance, healthcare, or legal. You need one of these files per domain your deployment covers. It works alongside the policy file, which controls output behaviour and deployment-level overrides. Replace all placeholder values with your organisation's specific categories. Delete all _note fields before uploading to Content Platform Engine.",
+
+  "description": "Replace with a short description of the domain this file covers and what types of content it defines. Example: Financial field redaction categories for banking and financial services.",
+
+  "usage_note": "Replace with instructions for how the agent must use these categories. Tell the agent to read the document and identify content by meaning and context, not by applying patterns mechanically. Example: Use these categories to identify sensitive content in document text. Read the document, recognise content that matches a category by meaning and context, then extract the exact string as found in the document to pass to the redaction tool.",
+
+  "categories": {
+    "_note": "Group categories by type. Each group contains one or more items. Add as many groups as your domain requires. Copy and repeat the group block below for every category group. Delete this _note field.",
+    "category_group_name": {
+      "_note": "Replace category_group_name with a label for this group. Example: banking_identifiers, patient_identifiers, payment_cards. Add one item block per sensitive content type in this group. Copy and repeat the item block below for every item. Delete this _note field.",
+      "description": "Replace with a short description of what this group covers. Example: Bank account and routing identifiers.",
+      "items": [
+        {
+          "_note": "One item per sensitive content type. name is what the agent calls this category. description tells the agent what to look for and which labels or headings typically appear near this content in a document. format_hint gives the agent enough information to recognise the format without using regex. Delete this _note field.",
+          "name": "Replace with a clear name for this content type.",
+          "description": "Replace with a description of what this content looks like and which labels the agent should look for near it in the document. Be specific. The more precise this is, the more accurately the agent identifies the right content.",
+          "format_hint": "Replace with a plain-language description of the format. Avoid regex."
+        },
+        {
+          "_note": "Example item. Shows the correct way to fill in this block. Delete this block before uploading.",
+          "name": "Bank Account Number",
+          "description": "A numeric account identifier. Look for labels such as Account No, Acct, Account Number, or Sender Account Number.",
+          "format_hint": "Digits only, 8 to 17 characters, sometimes grouped with spaces or dashes."
+        }
+      ]
+    }
+  }
+}

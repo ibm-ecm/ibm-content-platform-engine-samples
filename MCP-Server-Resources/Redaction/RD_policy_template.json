@@ -1,0 +1,51 @@
+{
+  "_note": "Template for the Redaction Policy resource file. This file controls output behaviour and sensitivity configuration for all redaction operations. It is separate from the domain-specific pattern files (RD_finance, RD_healthcare, etc.) which define what content to redact. Every deployment needs this policy file. Replace all placeholder values with your organisation's specific rules. Delete all _note fields before uploading to Content Platform Engine.",
+
+  "description": "Replace with a short description of what this file governs. Example: Behavioural policy for all redaction operations including output defaults, class-based output rules, content discovery, and sensitivity configuration.",
+
+  "output_defaults": {
+    "_note": "Defines the fallback output settings used when the document class is not listed in class_rules. This matters because not every document class will have a specific rule. Without a default, the agent has no basis for deciding how to output the redacted document. Delete this _note field.",
+    "description": "Replace with a description of when these defaults apply. Example: Fallback output settings used when the document class is not listed in class_rules.",
+    "redaction_output_type": "Replace with your default output type. Options: pdf, tiff.",
+    "redaction_output_mode": "Replace with your default output mode. Options: new_document, new_version."
+  },
+
+  "output_type_guidance": {
+    "_note": "Explains to the agent what each output type means so it can apply the correct one. Without this, the agent does not know the difference between pdf and tiff and may choose incorrectly. Delete this _note field.",
+    "pdf": "Replace with guidance on when to use pdf output.",
+    "tiff": "Replace with guidance on when to use tiff output."
+  },
+
+  "output_mode_guidance": {
+    "_note": "Explains to the agent what each output mode means so it applies the right one based on class rules or user intent. The distinction between new_document and new_version has real consequences for how the redacted file is stored and whether the original is preserved. Delete this _note field.",
+    "new_document": "Replace with guidance on when to use new_document mode. Example: Creates a separate new document in Content Platform Engine. The original is preserved untouched. Use this when the user wants to keep the original and produce a clean redacted copy for sharing or disclosure.",
+    "new_version": "Replace with guidance on when to use new_version mode. Example: Creates a new version of the same document in Content Platform Engine. The document ID and folder location stay the same. Use this when the user wants to update the document in place and keep document identity."
+  },
+
+  "class_rules": {
+    "_note": "Maps each document class to a specific output type and mode. Without this, the agent applies the same output behaviour to every document regardless of class. This matters because some classes require the original to be preserved while others should be versioned in place. Add one mapping per document class. Copy and repeat the block below for every class. Delete this _note field.",
+    "description": "Replace with a description of how the agent uses this mapping. Tell the agent to use the exact class name as provided by the system and to fall back to output_defaults if the class is not listed.",
+    "mappings": [
+      {
+        "_note": "Replace all values in this block. class_name is the exact Content Platform Engine class name. redaction_output_type is the output format for this class. redaction_output_mode is how the redacted document is stored. note explains to the agent why this class has these settings. Copy and repeat for every class. Delete this _note field.",
+        "class_name": "Replace with the exact class name as it appears in your Content Platform Engine object store.",
+        "redaction_output_type": "Replace with the output type for this class. Options: pdf, tiff.",
+        "redaction_output_mode": "Replace with the output mode for this class. Options: new_document, new_version.",
+        "note": "Replace with the reason this class uses these settings. The agent uses this to explain its decision to the user."
+      }
+    ]
+  },
+
+  "sensitivity_configuration": {
+    "_note": "Defines which content categories the agent must always redact and which it must always skip, regardless of what appears in a domain-specific pattern file. This is a deployment-level override. Without it, the agent relies entirely on pattern files and may redact content your organisation does not consider sensitive, or miss content it should always protect. Delete this _note field.",
+    "description": "Replace with a description of what this section governs. Example: Defines which content categories are considered sensitive for this deployment. The agent must only redact categories listed under always_redact and must skip categories listed under exclude_from_redaction even if they appear in a pattern file.",
+    "always_redact": [
+      "Replace with content category names the agent must always redact. Example: Social Security Number, Bank Account Number."
+    ],
+    "exclude_from_redaction": [
+      "Replace with content category names the agent must never redact even if they appear in a pattern file. Example: Phone Number, First Name."
+    ]
+  },
+
+  "content_discovery": "Replace with an instruction for how the agent must read document content before identifying what to redact. Example: Always call get_document_text_extract to read the document content before identifying what to redact. Do not ask the user to provide values that can be found in the document."
+}

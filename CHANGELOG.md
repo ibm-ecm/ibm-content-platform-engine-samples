@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+## [26.0.1.0] - 2026-09-29
+
+### Added
+- Added the [Content Cortex MCP Server Resource samples project](MCP-Server-Resources).
+
+### Changed
+- Updated [LICENSE](LICENSE) to IBM Content Cortex v26.0.1.
+
+
 ## [26.0.0.0] - 2026-06-26
 
 ### Added
@@ -13,6 +22,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Updated [LICENSE](LICENSE) to IBM Content Cortex v26.0.0.
 - Updated references for Content Services to Content Cortex. Also updated references for FileNet Content Manager to IBM Content Cortex.
+- Updated copyright date to 2026.
 
 
 ## [5.7.0.0] - 2025-06-20
@@ -106,7 +116,8 @@ All notable changes to this project will be documented in this file.
 - Added [Javadoc](https://ibm-ecm.github.io/ibm-content-platform-engine-samples/ContentEventWebhookReceiver/) for the Content Event Webhook Receiver sample application project to the [docs](docs) folder
 - Enabled [Github Pages](https://pages.github.com/) on the samples repository.
 
-[unreleased]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/compare/v26.0.0.0...HEAD
+[unreleased]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/compare/v26.0.1.0...HEAD
+[26.0.1.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v26.0.1.0
 [26.0.0.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v26.0.0.0
 [5.7.0.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.7.0.0
 [5.6.0.0]: https://github.com/ibm-ecm/ibm-content-platform-engine-samples/releases/tag/v5.6.0.0

@@ -1,0 +1,88 @@
+{
+  "description": "Behavioral policy for all redaction operations in a Healthcare deployment. Covers output defaults, class-based output rules, content discovery, and sensitivity configuration.",
+
+  "output_defaults": {
+    "description": "Fallback output settings used when the document class is not listed in class_rules.",
+    "redaction_output_type": "pdf",
+    "redaction_output_mode": "new_document"
+  },
+
+  "output_type_guidance": {
+    "pdf": "Standard output format. Use for all documents unless the user or document class requires TIFF.",
+    "tiff": "Image-based output format. Use when the downstream system requires TIFF, or when the user explicitly requests it."
+  },
+
+  "output_mode_guidance": {
+    "new_document": "Creates a separate new document in Content Platform Engine. The original is preserved untouched. Use this when the user wants to keep the original and produce a clean redacted copy for external sharing or patient release requests.",
+    "new_version": "Creates a new version of the same document in Content Platform Engine. The document ID and folder location stay the same. Use this when the user wants to update the document in place and keep document identity."
+  },
+
+  "class_rules": {
+    "description": "Look up the document's class_name here to determine the correct output type and mode. Use the exact class_name as provided by the system. Do not infer or substitute the class based on document content. Exact string match only. If the class is not listed, fall back to output_defaults.",
+    "mappings": [
+      {
+        "class_name": "PatientRecord",
+        "redaction_output_type": "pdf",
+        "redaction_output_mode": "new_document",
+        "note": "Patient records always produce a separate redacted copy for release. The complete clinical record must be preserved untouched for legal and continuity-of-care purposes."
+      },
+      {
+        "class_name": "MedicalBillingRecord",
+        "redaction_output_type": "pdf",
+        "redaction_output_mode": "new_version",
+        "note": "Billing records are redacted in-version to maintain claims audit continuity under the same document ID."
+      },
+      {
+        "class_name": "ConsentForm",
+        "redaction_output_type": "pdf",
+        "redaction_output_mode": "new_document",
+        "note": "Consent forms always produce a separate redacted copy. The signed original must be preserved untouched."
+      },
+      {
+        "class_name": "InsuranceAuthorizationForm",
+        "redaction_output_type": "pdf",
+        "redaction_output_mode": "new_document",
+        "note": "Insurance authorisation forms produce a separate redacted copy for sharing with payers or external parties."
+      },
+      {
+        "class_name": "ClinicalTrialDocument",
+        "redaction_output_type": "pdf",
+        "redaction_output_mode": "new_document",
+        "note": "Clinical trial documents always produce a separate redacted copy. IRB and FDA require the unredacted originals to remain intact."
+      },
+      {
+        "class_name": "ReferralLetter",
+        "redaction_output_type": "pdf",
+        "redaction_output_mode": "new_document",
+        "note": "Referral letters produce a separate redacted copy when shared with external providers or patients."
+      },
+      {
+        "class_name": "Document",
+        "redaction_output_type": "pdf",
+        "redaction_output_mode": "new_version",
+        "note": "Document class - produce a new version in place."
+      }
+    ]
+  },
+
+  "sensitivity_configuration": {
+    "description": "Defines which content categories are considered sensitive for this deployment. The agent should only redact categories listed under always_redact, and must skip categories listed under exclude_from_redaction even if they appear in a pattern resource file.",
+    "always_redact": [
+      "Social Security Number",
+      "Medical Record Number (MRN)",
+      "Health Plan Beneficiary Number",
+      "Full Face Photograph Reference",
+      "Biometric Identifier",
+      "Device or Implant Serial Number",
+      "Personal Home Address"
+    ],
+    "exclude_from_redaction": [
+      "Treating Facility Name",
+      "Attending Physician Name",
+      "Admission and Discharge Dates",
+      "Diagnosis Code (ICD-10)"
+    ]
+  },
+
+  "content_discovery": "Always call get_document_text_extract to read the document content before identifying what to redact. Do not ask the user to provide values that can be found in the document."
+}

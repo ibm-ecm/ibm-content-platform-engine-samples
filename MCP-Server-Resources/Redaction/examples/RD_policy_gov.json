@@ -1,0 +1,88 @@
+{
+  "description": "Behavioral policy for all redaction operations in a Government & Public Sector deployment. Covers output defaults, class-based output rules, content discovery, and sensitivity configuration.",
+
+  "output_defaults": {
+    "description": "Fallback output settings used when the document class is not listed in class_rules.",
+    "redaction_output_type": "pdf",
+    "redaction_output_mode": "new_document"
+  },
+
+  "output_type_guidance": {
+    "pdf": "Standard output format. Use for all documents unless the user or document class requires TIFF.",
+    "tiff": "Image-based output format. Use when the downstream system requires TIFF, or when the user explicitly requests it."
+  },
+
+  "output_mode_guidance": {
+    "new_document": "Creates a separate new document in Content Platform Engine. The original is preserved untouched. Use this when the user wants to keep the original and produce a clean redacted copy. Required for FOIA/FOIL releases and external disclosures.",
+    "new_version": "Creates a new version of the same document in Content Platform Engine. The document ID and folder location stay the same. Use this when the user wants to update the document in place and keep document identity."
+  },
+
+  "class_rules": {
+    "description": "Look up the document's class_name here to determine the correct output type and mode. Use the exact class_name as provided by the system. Do not infer or substitute the class based on document content. Exact string match only. If the class is not listed, fall back to output_defaults.",
+    "mappings": [
+      {
+        "class_name": "CaseFile",
+        "redaction_output_type": "pdf",
+        "redaction_output_mode": "new_version",
+        "note": "Active case files are redacted in-version to maintain a consistent audit trail under the same document ID."
+      },
+      {
+        "class_name": "AuditReport",
+        "redaction_output_type": "pdf",
+        "redaction_output_mode": "new_version",
+        "note": "Audit reports are versioned in place. The redacted version must remain linked to the original record for accountability."
+      },
+      {
+        "class_name": "ProcurementContract",
+        "redaction_output_type": "tiff",
+        "redaction_output_mode": "new_document",
+        "note": "Procurement contracts produce a separate TIFF redacted copy for public release. The executed original is always preserved untouched."
+      },
+      {
+        "class_name": "PublicRecordsRequest",
+        "redaction_output_type": "pdf",
+        "redaction_output_mode": "new_document",
+        "note": "FOIA/FOIL response packages always produce a separate redacted copy. The original unredacted set must be retained for appeal purposes."
+      },
+      {
+        "class_name": "PermitApplication",
+        "redaction_output_type": "pdf",
+        "redaction_output_mode": "new_document",
+        "note": "Permit applications produce a separate redacted copy for public or inter-agency sharing."
+      },
+      {
+        "class_name": "InternalMemo",
+        "redaction_output_type": "pdf",
+        "redaction_output_mode": "new_document",
+        "note": "Internal memos produce a separate redacted copy when disclosed externally."
+      },
+      {
+        "class_name": "Document",
+        "redaction_output_type": "pdf",
+        "redaction_output_mode": "new_version",
+        "note": "Document class - produce a new version in place."
+      }
+    ]
+  },
+
+  "sensitivity_configuration": {
+    "description": "Defines which content categories are considered sensitive for this deployment. The agent should only redact categories listed under always_redact, and must skip categories listed under exclude_from_redaction even if they appear in a pattern resource file.",
+    "always_redact": [
+      "Social Security Number",
+      "Driver's Licence Number",
+      "Personal Home Address",
+      "Personal Phone Number",
+      "Law Enforcement Informant Identifier",
+      "Juvenile Record Reference",
+      "Tax Identification Number"
+    ],
+    "exclude_from_redaction": [
+      "Government Agency Name",
+      "Public Official Title and Name",
+      "Case Filing Date",
+      "Contract Award Amount"
+    ]
+  },
+
+  "content_discovery": "Always call get_document_text_extract to read the document content before identifying what to redact. Do not ask the user to provide values that can be found in the document."
+}

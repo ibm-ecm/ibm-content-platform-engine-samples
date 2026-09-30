@@ -1,0 +1,81 @@
+{
+  "_note": "Template for the Classification and Reclassification resource file. Replace all placeholder values with your organisation's specific rules. Delete all _note fields before uploading to Content Platform Engine.",
+
+  "policy": {
+    "name": "Replace with a name for this policy.",
+    "domain": "Replace with the industry or business domain this policy applies to. Example: Healthcare, Insurance, Banking.",
+    "description": "Replace with one to two sentences describing what this file governs. State whether it covers classification, reclassification, or both, and what document types it applies to.",
+    "instructions": [
+      "_note: Write one instruction per entry as a direct command. Define when to read document content, which lists to check before acting, and when the agent must stop and refuse regardless of what the user asks. Delete this entry and replace with your instructions.",
+      "_note: Always include at least one stop instruction. The agent wants to help the user, so without a clear stop condition it will look for workarounds when it cannot complete a task. Example: When a do_not_classify outcome is reached, do not offer alternatives. The response must end with the refusal. Delete this entry."
+    ]
+  },
+
+  "confidence_thresholds": {
+    "_note": "Define as many confidence tiers as your organisation needs. Each tier has a score range and an action the agent must take. Tiers must cover every possible score with no gaps. The lowest tier must always be a refusal the user cannot override. Set reclassification thresholds higher than classification because changing an existing class carries more risk. Delete this _note field.",
+    "classification": {
+      "description": "Replace with a short description of what these thresholds apply to.",
+      "_note_tiers": "Add one block per tier. Replace tier_name with a label. Example: high, medium, low. The example below shows one tier. Copy and extend as needed. Delete this _note_tiers field.",
+      "tier_name": {
+        "_note": "Replace tier_name above with your label. For the highest tier: the agent presents its recommendation clearly and asks the user to confirm before proceeding, without adding statements that make the user second-guess the decision. For middle tiers: the agent tells the user confidence is not high enough to be certain, presents the proposed class and reasoning, and asks the user to confirm. For the lowest tier: the agent must refuse and make clear the user cannot override this outcome. Delete this _note field.",
+        "min": 0.0,
+        "max": 0.0,
+        "action": "Replace with what the agent must do when confidence falls in this range."
+      }
+    },
+    "reclassification": {
+      "description": "Replace with a short description. Tell the agent that reclassification requires stronger evidence than initial classification.",
+      "_note_tiers": "Same pattern as classification. Add one block per tier. Delete this _note_tiers field.",
+      "tier_name": {
+        "_note": "Same guidance as classification tiers. For middle tiers, explicitly ask the user if they are sure before proceeding because changing an existing class carries more risk. Delete this _note field.",
+        "min": 0.0,
+        "max": 0.0,
+        "action": "Replace with what the agent must do when confidence falls in this range."
+      }
+    }
+  },
+
+  "classification": {
+    "eligible_source_classes": {
+      "description": "Replace with a description of which source classes are eligible and what the agent must do if the document is not in this list.",
+      "classes": ["Replace with your eligible source classes. Example: GenericDocument"]
+    }
+  },
+
+  "reclassification": {
+    "eligible_source_classes": {
+      "description": "Replace with a description of which source classes are eligible for reclassification and what the agent must do if the document is not in this list.",
+      "classes": ["Replace with your eligible source classes."]
+    },
+    "locked_classes": {
+      "_note": "Optional. Documents in these classes must never be reclassified. The agent refuses immediately if the document belongs to one of these classes. Remove this entire section if you have no locked classes. Delete this _note field.",
+      "description": "Documents in these classes must NOT be reclassified for any reason.",
+      "classes": [
+        {
+          "class_symbolic_name": "Replace with the exact class name as it appears in your object store.",
+          "rejection_reason": "Replace with why this class is locked. The agent uses this to explain the refusal to the user."
+        }
+      ]
+    }
+  },
+
+  "target_classes": [
+    {
+      "_note": "One entry per class the agent is permitted to assign. Copy and repeat this block for every target class. Delete this _note field before uploading.",
+      "class_symbolic_name": "Replace with the exact symbolic name as it appears in your Content Platform Engine object store.",
+      "description": "Replace with a description of what kind of document belongs in this class. Include document types, typical content, and business purpose. The agent uses this to decide whether the document content matches.",
+      "content_signals": [
+        "Replace with words or phrases that strongly indicate this class. The agent looks for these in the document content."
+      ],
+      "exclusions": [
+        "_note: Optional. Remove this entire field if you have no exclusions. Otherwise replace each entry with a condition that must cause the agent to reject this class even if content signals are present. Example: Do not classify as this class if the document contains a more specific class signal. Delete this entry."
+      ]
+    }
+  ],
+
+  "fallback": {
+    "description": "Replace with what the agent must do when no class meets the minimum confidence threshold. Example: If no class meets the minimum confidence threshold, retain the document in its current class.",
+    "action": "Replace with the fallback action. Example: retain_current_class",
+    "prohibition": "Replace with a rule that stops the agent from suggesting alternatives when it cannot classify. Example: If confidence is below threshold, do not recommend or suggest any target class. The only valid outcome is retain_current_class."
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "policy": {
+    "name": "Government & Public Sector Document Classification and Reclassification Policy",
+    "domain": "Government & Public Sector",
+    "description": "Governs class assignment for government and public sector documents stored in Content Platform Engine. Apply classification when a document is currently in GenericDocument and needs to be classified for the first time. Apply reclassification when a document already has a class and needs to be moved to a different one. Reclassification requires higher confidence than initial classification to comply with official public records schedules.",
+    "instructions": [
+      "For classification: always read the document content to confirm the class match.",
+      "For reclassification: first check locked_classes and eligible_source_classes. Only read document content if the operation is permitted.",
+      "Verify if the document has been archived: call get_document_properties to check if the RecordStatus property is 'Archived' or 'Frozen'. If archived, reclassification is strictly prohibited to preserve historical record integrity and statutory compliance.",
+      "Only propose a class that is explicitly listed in target_classes. Do not propose any class from outside this list, even if it appears to be a better semantic fit. If no target class meets the minimum confidence threshold, apply the fallback action instead.",
+      "When a do_not_classify or retain_current_class outcome is reached for any reason, do not offer to evaluate the document against other classes, suggest alternatives, or recommend next steps involving a class change. The response must end with the refusal."
+    ]
+  },
+
+  "confidence_thresholds": {
+    "classification": {
+      "description": "Thresholds for initial classification of public records currently in GenericDocument. Configured for standard archival risk.",
+      "high": {
+        "min": 0.80,
+        "action": "Apply the classification and confirm the decision with the user before proceeding."
+      },
+      "medium": {
+        "min": 0.50,
+        "max": 0.80,
+        "action": "Ask the user to confirm. Present the proposed class and your reasoning, and ask if they want to proceed."
+      },
+      "low": {
+        "below": 0.50,
+        "action": "Do not classify. Refuse the request. Inform the user that confidence is too low, manual review is required, and the classification cannot be applied even if the user asks to proceed."
+      }
+    },
+    "reclassification": {
+      "description": "Thresholds for reclassification of already-classified public records. Reclassification requires clear alignment with statutory schedules.",
+      "high": {
+        "min": 0.85,
+        "action": "Apply the reclassification and confirm the decision with the user before proceeding."
+      },
+      "medium": {
+        "min": 0.60,
+        "max": 0.85,
+        "action": "Ask the user to confirm. Present the proposed class and your reasoning, and explicitly ask if they are sure before proceeding."
+      },
+      "low": {
+        "below": 0.60,
+        "action": "Do not reclassify. Refuse the request. Inform the user that confidence is too low, manual review is required, and the reclassification cannot be applied even if the user asks to proceed."
+      }
+    }
+  },
+
+  "classification": {
+    "eligible_source_classes": {
+      "description": "Initial classification only applies to documents currently in these classes.",
+      "classes": ["GenericDocument"]
+    }
+  },
+
+  "reclassification": {
+    "eligible_source_classes": {
+      "description": "Only documents currently in these classes are eligible for reclassification.",
+      "classes": [
+        "GenericDocument",
+        "CaseFile",
+        "PermitApplication",
+        "InternalMemo",
+        "PublicRecordsRequest"
+      ]
+    },
+    "locked_classes": {
+      "description": "Documents in these classes must NOT be reclassified for any reason.",
+      "classes": [
+        {
+          "class_symbolic_name": "AuditReport",
+          "rejection_reason": "Locked for regulatory and accountability audit integrity. Reclassification would break the official record chain."
+        },
+        {
+          "class_symbolic_name": "ProcurementContract",
+          "rejection_reason": "Locked once executed to preserve the legal enforceability of the awarded contract."
+        }
+      ]
+    }
+  },
+
+  "target_classes": [
+    {
+      "class_symbolic_name": "CaseFile",
+      "description": "Active government investigation, enforcement, or administrative case records. Includes incident files, investigation summaries, enforcement actions, and case correspondence.",
+      "content_signals": [
+        "case number", "investigation", "enforcement action", "subject of investigation",
+        "incident report", "officer", "agency", "finding", "violation", "complaint",
+        "case status", "respondent", "matter reference"
+      ],
+      "exclusions": [
+        "Do not classify as CaseFile if the document is only a general informational memo with no case reference number."
+      ]
+    },
+    {
+      "class_symbolic_name": "PermitApplication",
+      "description": "Applications submitted to a government body requesting a permit, licence, or authorisation. Includes construction permits, operating licences, zoning variances, and environmental authorisations.",
+      "content_signals": [
+        "permit application", "licence application", "applicant", "zoning", "variance",
+        "authorisation", "site address", "permit number", "inspection", "fee paid",
+        "approved use", "environmental assessment", "occupancy"
+      ],
+      "exclusions": []
+    },
+    {
+      "class_symbolic_name": "AuditReport",
+      "description": "Formal audit findings issued by or to a government oversight body. Includes internal audit reports, inspector general findings, compliance assessments, and financial audits of public funds.",
+      "content_signals": [
+        "audit report", "findings", "recommendations", "internal control", "compliance",
+        "inspector general", "material weakness", "corrective action", "scope of audit",
+        "public funds", "appropriations", "fiscal review", "accountability"
+      ],
+      "exclusions": []
+    },
+    {
+      "class_symbolic_name": "ProcurementContract",
+      "description": "Legally binding agreements between a government agency and a vendor or contractor for goods or services. Includes RFP awards, service contracts, purchase orders above threshold, and grant agreements.",
+      "content_signals": [
+        "contract award", "vendor", "contractor", "statement of work", "procurement",
+        "RFP", "RFQ", "bid", "purchase order", "terms and conditions", "deliverables",
+        "performance period", "agency", "awarded", "executed", "obligated amount"
+      ],
+      "exclusions": []
+    },
+    {
+      "class_symbolic_name": "PublicRecordsRequest",
+      "description": "Requests submitted under freedom-of-information or open-records legislation and related agency response packages. Includes FOIA requests, FOIL requests, responsive document sets, and denial/exemption notices.",
+      "content_signals": [
+        "freedom of information", "FOIA", "FOIL", "open records", "public records request",
+        "responsive documents", "exemption", "redaction", "disclosure", "request tracking number",
+        "records custodian", "agency response", "appeal"
+      ],
+      "exclusions": []
+    },
+    {
+      "class_symbolic_name": "InternalMemo",
+      "description": "Internal agency communications not tied to an active case or formal proceeding. Includes policy guidance memos, staff announcements, inter-departmental notices, and briefing notes.",
+      "content_signals": [
+        "memorandum", "to:", "from:", "subject:", "internal", "department", "staff",
+        "guidance", "briefing", "policy update", "action required", "for your information",
+        "director", "division chief"
+      ],
+      "exclusions": [
+        "Do not classify as InternalMemo if the document references a specific case number or enforcement action. Classify as CaseFile instead."
+      ]
+    }
+  ],
+
+  "fallback": {
+    "description": "If no class meets the minimum confidence threshold, retain the document in its current class. Misclassification of public records can violate statutory retention schedules and break the official record chain.",
+    "action": "retain_current_class",
+    "prohibition": "If confidence is below threshold, do not recommend, suggest, or offer any target class as a possible fit. The only valid outcome is retain_current_class."
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "policy": {
+    "name": "Smart Document Search Settings",
+    "description": "Governs how smart_document_search is called. Read this resource before invoking smart_document_search."
+  },
+
+  "smart_search": {
+    "tool": "smart_document_search",
+    "parameter": "vector_first (boolean, default true)",
+    "description": "Controls execution order in the hybrid search. Must be set explicitly on every call.",
+    "rule": "Always pass vector_first=false."
+  }
+}

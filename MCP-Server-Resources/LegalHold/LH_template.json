@@ -1,0 +1,66 @@
+{
+  "_note": "Template for the Legal Hold resource file. Replace all placeholder values with your organisation's specific rules. Delete all _note fields before uploading to Content Platform Engine.",
+
+  "workflow": {
+    "_note": "Defines the first action the agent must always take before doing anything else. This matters because the agent needs document class and property information before it can apply any mapping or make any hold decision. Without this step, it may ask the user for information it could have retrieved itself. Delete this _note field.",
+    "first_step": "Replace with the first action the agent must always take. Example: When documents are selected, always call get_document_properties on each document first to determine the document class and required property values. Do not ask the user for information that can be retrieved from document properties."
+  },
+
+  "policy": {
+    "name": "Replace with a name for this policy.",
+    "domain": "Replace with the industry or business domain this policy applies to. Example: Healthcare, Insurance, Banking."
+  },
+
+  "class_to_hold_mapping": {
+    "_note": "This is the core of the legal hold policy. It tells the agent which hold to create based on the document class, and which property to use to build the hold name. Without this mapping the agent has no basis for deciding what hold applies to a document and will either guess or ask the user. Add one mapping block per document class group. Copy and repeat the block below for every group. Delete this _note field.",
+    "description": "Replace with a description of how the agent uses this mapping. Example: Use the document class to look up the correct hold name pattern, required property, and hold class.",
+    "mappings": [
+      {
+        "_note": "Replace all values in this block. document_classes lists the class names this mapping applies to. hold_display_name_pattern is the hold name the agent will use, with the property value substituted in. required_property is the document property the agent must read to build the hold name. hold_class is the Content Platform Engine class used to create the hold. Delete this _note field.",
+        "document_classes": [
+          "Replace with document class names that share the same hold pattern."
+        ],
+        "hold_display_name_pattern": "Replace with the hold name pattern. Use {PropertyName} where the property value should be substituted. Example: CLAIMS_{ClaimNumber}",
+        "required_property": "Replace with the document property the agent must read to build the hold name. Example: ClaimNumber",
+        "hold_class": "Replace with the Content Platform Engine class used to create the hold. Example: CmHold"
+      }
+    ]
+  },
+
+  "hold_naming": {
+    "_note": "Consistent hold naming prevents duplicates. If the agent does not know the expected format, it may create a new hold when one already exists for the same matter. The examples here give the agent a concrete reference for what a correctly formed hold name looks like. Delete this _note field.",
+    "description": "Replace with instructions for how the agent must handle hold names. Tell the agent to search for an existing hold before creating a new one to avoid duplicates.",
+    "examples": [
+      "Replace with example hold names from your organisation so the agent understands the expected format."
+    ]
+  },
+
+  "relevancy_assessment": {
+    "_note": "Without clear relevancy rules the agent may place documents on hold based on general topic similarity rather than a specific match to the user's stated matter. This section defines exactly when a document qualifies and prevents over-holding. Delete this _note field.",
+    "description": "Replace with a description of how the agent determines whether a document is relevant to the user's stated matter. State clearly that hold assignment is driven by document class, not document content.",
+    "when_to_use_text_extract": "Replace with guidance on when the agent should read document content. Define what makes a document relevant and what does not.",
+    "before_acting": "Replace with what the agent must present to the user before placing any document on hold. Tell the agent to wait for explicit user confirmation before proceeding."
+  },
+
+  "unmapped_class_fallback": {
+    "_note": "Defines what the agent does when a document class is not in class_to_hold_mapping. This matters because the agent will encounter document classes that are not covered by the mapping. Without an explicit instruction it may guess a hold or skip the document silently. Always surface this to the user. Delete this _note field.",
+    "description": "Replace with what the agent must do when the document class is not in the mapping. Tell the agent not to guess and to ask the user for explicit instruction.",
+    "action": "Replace with the specific action the agent must take. Example: Read the document content, inform the user no hold is defined for this class, and wait for explicit instruction."
+  },
+
+  "release_conditions": {
+    "_note": "Release conditions prevent the agent from releasing a document from hold when the underlying matter is still active. Without these checks the agent may release on user request alone, which could have legal consequences. Each condition defines a property that must be in a specific state before release is permitted. Add one condition block per property. Copy and repeat the block below for every property. Delete this _note field.",
+    "description": "Replace with a description of the property checks the agent must perform before releasing a document from hold.",
+    "conditions": [
+      {
+        "_note": "Replace all values in this block. property is the document property the agent must check. required_values lists the values that permit release. if_matched defines what the agent does when the property value matches. if_mismatched defines what the agent does when it does not match. Always tell the agent to refuse on mismatch and never offer to override. Delete this _note field.",
+        "property": "Replace with the property name the agent must check before releasing.",
+        "required_values": [
+          "Replace with the values that permit release. Example: Closed, Settled"
+        ],
+        "if_matched": "Replace with what the agent must do when the property matches. Example: Proceed to release the hold and confirm the action to the user.",
+        "if_mismatched": "Replace with what the agent must do when the property does not match. Tell the agent to refuse release, state which property did not match and what value it found, and not offer to override."
+      }
+    ]
+  }
+}

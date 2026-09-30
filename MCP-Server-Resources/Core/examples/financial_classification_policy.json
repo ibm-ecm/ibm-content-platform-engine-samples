@@ -1,0 +1,163 @@
+{
+  "policy": {
+    "name": "Financial Services & Insurance Document Classification and Reclassification Policy",
+    "domain": "Financial Services & Insurance",
+    "description": "Governs class assignment for banking, lending, and insurance documents stored in Content Platform Engine. Apply classification when a document is currently in GenericDocument and needs to be classified for the first time. Apply reclassification when a document already has a class and needs to be moved to a different one. Reclassification requires higher confidence than initial classification to comply with audit trail, GLBA, and SOX transaction regulations.",
+    "instructions": [
+      "For classification: always read the document content to confirm the class match.",
+      "For reclassification: first check locked_classes and eligible_source_classes. Only read document content if the operation is permitted.",
+      "Verify if the transaction or loan has been closed: check if the LoanStatus property is 'Closed' or 'Disbursed', or if DocumentStatus is 'Approved'. If closed or disbursed, reclassification is strictly prohibited to comply with credit auditing rules.",
+      "Only propose a class that is explicitly listed in target_classes. Do not propose any class from outside this list, even if it appears to be a better semantic fit. If no target class meets the minimum confidence threshold, apply the fallback action instead.",
+      "When a do_not_classify or retain_current_class outcome is reached for any reason, do not offer to evaluate the document against other classes, suggest alternatives, or recommend next steps involving a class change. The response must end with the refusal."
+    ]
+  },
+
+  "confidence_thresholds": {
+    "classification": {
+      "description": "Thresholds for initial classification of banking and claims documents currently in GenericDocument. Low thresholds prevent accounting and billing routing errors.",
+      "high": {
+        "min": 0.88,
+        "action": "Apply the classification and confirm the decision with the user before proceeding."
+      },
+      "medium": {
+        "min": 0.65,
+        "max": 0.88,
+        "action": "Ask the user to confirm. Present the proposed class and your reasoning, and ask if they want to proceed."
+      },
+      "low": {
+        "below": 0.65,
+        "action": "Do not classify. Refuse the request. Inform the user that confidence is too low, manual review is required, and the classification cannot be applied even if the user asks to proceed."
+      }
+    },
+    "reclassification": {
+      "description": "Thresholds for reclassification of already-classified files. Reclassification carries high financial and audit risk.",
+      "high": {
+        "min": 0.92,
+        "action": "Apply the reclassification and confirm the decision with the user before proceeding."
+      },
+      "medium": {
+        "min": 0.78,
+        "max": 0.92,
+        "action": "Ask the user to confirm. Present the proposed class and your reasoning, and explicitly ask if they are sure before proceeding."
+      },
+      "low": {
+        "below": 0.78,
+        "action": "Do not reclassify. Refuse the request. Inform the user that confidence is too low, audit-readiness review is required, and the reclassification cannot be applied even if the user asks to proceed."
+      }
+    }
+  },
+
+  "classification": {
+    "eligible_source_classes": {
+      "description": "Initial classification only applies to documents currently in these classes.",
+      "classes": ["GenericDocument"]
+    }
+  },
+
+  "reclassification": {
+    "eligible_source_classes": {
+      "description": "Only documents currently in these classes are eligible for reclassification.",
+      "classes": [
+        "GenericDocument",
+        "MortgageApplication",
+        "KYCDocument",
+        "CreditReport",
+        "LoanAgreement",
+        "ClaimForm",
+        "SettlementAgreement"
+      ]
+    },
+    "locked_classes": {
+      "description": "Documents in these classes must NOT be reclassified for any reason.",
+      "classes": [
+        {
+          "class_symbolic_name": "LoanAgreement",
+          "rejection_reason": "Locked once executed and active to preserve legal and contractual integrity of the debt obligation."
+        },
+        {
+          "class_symbolic_name": "KYCDocument",
+          "rejection_reason": "Locked once verified to comply with anti-money laundering (AML) and know-your-customer (KYC) regulatory audit requirements."
+        },
+        {
+          "class_symbolic_name": "SettlementAgreement",
+          "rejection_reason": "Locked once signed by all parties to maintain legal release of claims and audit-readiness under financial regulations."
+        }
+      ]
+    }
+  },
+
+  "target_classes": [
+    {
+      "class_symbolic_name": "LoanAgreement",
+      "description": "Legally binding lending agreements between the institution and a borrower. Includes mortgage notes, consumer or personal loan agreements, commercial credit facilities, and promissory notes.",
+      "content_signals": [
+        "promissory note", "interest rate", "loan amount", "borrower", "lender", "principal",
+        "maturity date", "payment schedule", "default rate", "security agreement",
+        "collateral", "repayment", "co-signer", "lending disclosure", "annual percentage rate"
+      ],
+      "exclusions": [
+        "Do not classify as LoanAgreement if the document is only a pre-qualification letter or an application with no binding loan execution terms."
+      ]
+    },
+    {
+      "class_symbolic_name": "KYCDocument",
+      "description": "Customer identification, verification, and due diligence records required for regulatory compliance. Includes government photo IDs, utility bill proof of residency, corporate registry certificates, and beneficial owner forms.",
+      "content_signals": [
+        "passport", "driver's licence", "national identity", "proof of address",
+        "utility bill", "certificate of incorporation", "beneficial ownership",
+        "KYC check", "customer due diligence", "AML questionnaire", "corporate registry",
+        "tax residency", "W-8BEN", "W-9"
+      ],
+      "exclusions": []
+    },
+    {
+      "class_symbolic_name": "CreditReport",
+      "description": "Credit history reports and credit score analyses compiled by major bureaus. Includes consumer credit files, trade histories, public record search summaries, and underwriting reports.",
+      "content_signals": [
+        "credit score", "FICO", "credit bureau", "Equifax", "Experian", "TransUnion",
+        "credit history", "delinquency", "trade lines", "inquiries", "derogatory",
+        "credit summary", "underwriting file", "co-applicant score"
+      ],
+      "exclusions": []
+    },
+    {
+      "class_symbolic_name": "MortgageApplication",
+      "description": "Residential or commercial mortgage application forms and underwriting checklists. Includes Uniform Residential Loan Applications (Form 1003) and related initial disclosure files.",
+      "content_signals": [
+        "form 1003", "uniform residential loan application", "mortgage loan application",
+        "pre-approval letter", "pre-qualification", "property value", "purchase price",
+        "employment history", "monthly income", "down payment", "estimated value",
+        "co-borrower"
+      ],
+      "exclusions": []
+    },
+    {
+      "class_symbolic_name": "ClaimForm",
+      "description": "Formal insurance claim submissions detailing losses, accidents, or incidents for coverage assessment. Includes auto loss notices, property claim filings, and initial disaster damage assessments.",
+      "content_signals": [
+        "claim filing", "claim form", "date of loss", "cause of loss", "policyholder",
+        "policy number", "accident report", "insured property", "deductible",
+        "damage description", "loss adjuster", "repair estimate", "claimant"
+      ],
+      "exclusions": [
+        "Do not classify as ClaimForm if the document is a final settlement and release agreement. Classify as SettlementAgreement instead."
+      ]
+    },
+    {
+      "class_symbolic_name": "SettlementAgreement",
+      "description": "Signed legal settlement contracts resolving insurance claims. Includes releases of all claims, payment schedules, structured settlement contracts, and mutual discharge agreements.",
+      "content_signals": [
+        "settlement agreement", "release of claims", "release of liability", "indemnification",
+        "payout sum", "full and final settlement", "discharge", "dispute resolution",
+        "settling party", "compromise and release", "mutually agree"
+      ],
+      "exclusions": []
+    }
+  ],
+
+  "fallback": {
+    "description": "If no class meets the minimum confidence threshold, retain the document in its current class. Misclassification in a financial context carries audit, GLBA, and SOX compliance risk.",
+    "action": "retain_current_class",
+    "prohibition": "If confidence is below threshold, do not recommend, suggest, or offer any target class as a possible fit. The only valid outcome is retain_current_class."
+  }
+}

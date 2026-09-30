@@ -1,0 +1,89 @@
+{
+  "workflow": {
+    "first_step": "When documents are selected, always call get_document_properties on each selected document first to determine the document class and required property values. Do not ask the user for information that can be retrieved from the document properties."
+  },
+
+  "policy": {
+    "name": "Healthcare Legal Hold Policy",
+    "domain": "Healthcare"
+  },
+
+  "class_to_hold_mapping": {
+    "description": "Use the document's className to look up the correct hold name pattern, required property, and hold class. The hold display name is derived entirely from document properties. Do not ask the user to supply identifiers that can be read from metadata.",
+    "mappings": [
+      {
+        "document_classes": [
+          "PatientRecord",
+          "ConsentForm",
+          "ReferralLetter"
+        ],
+        "hold_display_name_pattern": "PATIENT_{PatientMRN}",
+        "required_property": "PatientMRN",
+        "hold_class": "CmHold"
+      },
+      {
+        "document_classes": [
+          "MedicalBillingRecord",
+          "InsuranceAuthorizationForm"
+        ],
+        "hold_display_name_pattern": "BILLING_{ClaimNumber}",
+        "required_property": "ClaimNumber",
+        "hold_class": "CmHold"
+      },
+      {
+        "document_classes": [
+          "ClinicalTrialDocument"
+        ],
+        "hold_display_name_pattern": "TRIAL_{ProtocolNumber}",
+        "required_property": "ProtocolNumber",
+        "hold_class": "CmHold"
+      }
+    ]
+  },
+
+  "hold_naming": {
+    "description": "The hold display name is passed to create_hold and get_holds_by_name. Always search for an existing hold before creating a new one to avoid duplicates.",
+    "examples": [
+      "PATIENT_MRN-2024-00412",
+      "BILLING_CLM-2024-00089",
+      "TRIAL_PROT-2024-00034"
+    ]
+  },
+
+  "relevancy_assessment": {
+    "description": "Document content is used only to assess relevancy to the user's stated matter. Hold assignment is always driven by document class, never by content alone.",
+    "when_to_use_text_extract": "When the user's prompt references a specific patient, claim, or trial, use get_document_text_extract. A document is relevant ONLY if that specific identifier is explicitly mentioned in its text or metadata. General clinical or billing context alone is not sufficient.",
+    "before_acting": "Before placing any document on hold, present the full relevancy assessment to the user: list which documents match the stated matter, which do not, and the proposed hold action for each match. Wait for explicit user confirmation before proceeding."
+  },
+
+  "unmapped_class_fallback": {
+    "description": "If the document class is not in class_to_hold_mapping, do not guess. Surface it to the user with a content summary and ask them to specify a hold or skip the document.",
+    "action": "Call get_document_text_extract, inform the user no hold is defined for this class, and wait for explicit instruction."
+  },
+
+  "release_conditions": {
+    "header": "Legal Hold Release Validation Rules",
+    "description": "Metadata property checks required before releasing a document from hold. The agent must first retrieve the document's properties to verify these values. These rules are enforced regardless of user instruction. Do not offer to bypass them.",
+    "conditions": [
+      {
+        "property": "MalpracticeDisputeStatus",
+        "required_values": [
+          "Settled",
+          "Dismissed",
+          "Adjudicated"
+        ],
+        "if_matched": "Proceed to release hold immediately without asking for confirmation.",
+        "if_mismatched": "Strictly refuse release, state that MalpracticeDisputeStatus does not equal the required value, and do not offer to override."
+      },
+      {
+        "property": "PatientConsentActive",
+        "required_values": [
+          "Expired",
+          "Revoked"
+        ],
+        "if_matched": "Proceed to release hold immediately without asking for confirmation.",
+        "if_mismatched": "Strictly refuse release, state that PatientConsentActive does not equal the required value, and do not offer to override."
+      }
+    ]
+  }
+}

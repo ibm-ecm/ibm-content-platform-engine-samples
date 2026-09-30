@@ -1,0 +1,160 @@
+{
+  "policy": {
+    "name": "Healthcare Document Classification and Reclassification Policy",
+    "domain": "Healthcare",
+    "description": "Governs class assignment for healthcare documents stored in Content Platform Engine. Apply classification when a document is currently in GenericDocument and needs to be classified for the first time. Apply reclassification when a document already has a class and needs to be moved to a different one. Reclassification requires higher confidence than initial classification to maintain patient safety, HIPAA compliance, and clinical record integrity.",
+    "instructions": [
+      "For classification: always read the document content to confirm the class match.",
+      "For reclassification: first check locked_classes and eligible_source_classes. Only read document content if the operation is permitted.",
+      "Verify if the document has been signed: check if the DocumentStatus property is 'Signed'. If signed, reclassification is strictly prohibited.",
+      "Only propose a class that is explicitly listed in target_classes. Do not propose any class from outside this list, even if it appears to be a better semantic fit. If no target class meets the minimum confidence threshold, apply the fallback action instead.",
+      "When a do_not_classify or retain_current_class outcome is reached for any reason, do not offer to evaluate the document against other classes, suggest alternatives, or recommend next steps involving a class change. The response must end with the refusal."
+    ]
+  },
+
+  "confidence_thresholds": {
+    "classification": {
+      "description": "Thresholds for initial classification of documents currently in GenericDocument. Low thresholds strictly prevent clinical record misrouting.",
+      "high": {
+        "min": 0.85,
+        "action": "Apply the classification and confirm the decision with the user before proceeding."
+      },
+      "medium": {
+        "min": 0.60,
+        "max": 0.85,
+        "action": "Ask the user to confirm. Present the proposed class and your reasoning, and ask if they want to proceed."
+      },
+      "low": {
+        "below": 0.60,
+        "action": "Do not classify. Refuse the request. Inform the user that confidence is too low, clinical review is required, and the classification cannot be applied even if the user asks to proceed."
+      }
+    },
+    "reclassification": {
+      "description": "Thresholds for reclassification of already-classified documents. Reclassification carries high clinical and compliance risk and requires clinical consensus.",
+      "high": {
+        "min": 0.90,
+        "action": "Apply the reclassification and confirm the decision with the user before proceeding."
+      },
+      "medium": {
+        "min": 0.75,
+        "max": 0.90,
+        "action": "Ask the user to confirm. Present the proposed class and your reasoning, and explicitly ask if they are sure before proceeding."
+      },
+      "low": {
+        "below": 0.75,
+        "action": "Do not reclassify. Refuse the request. Inform the user that confidence is too low, manual clinical auditing is required, and the reclassification cannot be applied even if the user asks to proceed."
+      }
+    }
+  },
+
+  "classification": {
+    "eligible_source_classes": {
+      "description": "Initial classification only applies to documents currently in these classes.",
+      "classes": ["GenericDocument"]
+    }
+  },
+
+  "reclassification": {
+    "eligible_source_classes": {
+      "description": "Only documents currently in these classes are eligible for reclassification.",
+      "classes": [
+        "GenericDocument",
+        "MedicalBillingRecord",
+        "ReferralLetter",
+        "InsuranceAuthorizationForm"
+      ]
+    },
+    "locked_classes": {
+      "description": "Documents in these classes must NOT be reclassified for any reason.",
+      "classes": [
+        {
+          "class_symbolic_name": "PatientRecord",
+          "rejection_reason": "Locked once a clinical note or encounter is attached. Reclassification would break the legal medical record chain."
+        },
+        {
+          "class_symbolic_name": "ConsentForm",
+          "rejection_reason": "Locked once signed to preserve the legal validity and enforceability of the patient consent."
+        },
+        {
+          "class_symbolic_name": "ClinicalTrialDocument",
+          "rejection_reason": "Locked for IRB and FDA audit integrity. Reclassification is prohibited under clinical trial data governance rules."
+        }
+      ]
+    }
+  },
+
+  "target_classes": [
+    {
+      "class_symbolic_name": "PatientRecord",
+      "description": "Official clinical records for a patient encounter or episode of care. Includes discharge summaries, progress notes, operative reports, and physician orders.",
+      "content_signals": [
+        "patient name", "date of birth", "MRN", "medical record number", "attending physician",
+        "diagnosis", "ICD", "chief complaint", "history of present illness", "assessment and plan",
+        "discharge summary", "admission date", "encounter", "vital signs", "clinical note"
+      ],
+      "exclusions": [
+        "Do not classify as PatientRecord if the document is solely a billing statement with no clinical content."
+      ]
+    },
+    {
+      "class_symbolic_name": "ConsentForm",
+      "description": "Signed patient authorisation documents. Includes surgical consent, general treatment consent, HIPAA authorisation, and release-of-information forms.",
+      "content_signals": [
+        "consent", "authorisation", "I hereby consent", "patient signature", "witness",
+        "procedure", "risks and benefits", "HIPAA", "release of information",
+        "informed consent", "voluntary", "right to refuse"
+      ],
+      "exclusions": []
+    },
+    {
+      "class_symbolic_name": "MedicalBillingRecord",
+      "description": "Financial and claims documents related to billing for healthcare services. Includes UB-04 claims, CMS-1500 forms, explanation of benefits (EOB), and charge capture records.",
+      "content_signals": [
+        "claim number", "UB-04", "CMS-1500", "CPT code", "ICD-10", "diagnosis code",
+        "procedure code", "billed amount", "allowed amount", "EOB", "payer",
+        "insurance", "co-pay", "deductible", "remittance", "revenue code"
+      ],
+      "exclusions": [
+        "Do not classify as MedicalBillingRecord if the document contains clinical narrative beyond billing codes. Classify as PatientRecord instead."
+      ]
+    },
+    {
+      "class_symbolic_name": "InsuranceAuthorizationForm",
+      "description": "Prior authorisation requests and approvals submitted to or received from payers. Includes pre-auth forms, medical necessity letters, and payer determination notices.",
+      "content_signals": [
+        "prior authorisation", "pre-auth", "authorization number", "medical necessity",
+        "payer", "health plan", "procedure requested", "treating provider",
+        "clinical justification", "approved", "denied", "effective date", "NPI"
+      ],
+      "exclusions": []
+    },
+    {
+      "class_symbolic_name": "ClinicalTrialDocument",
+      "description": "Documents generated under an IRB-approved clinical trial protocol. Includes informed consent forms for trial participation, protocol amendments, adverse event reports, and data collection forms.",
+      "content_signals": [
+        "clinical trial", "protocol", "IRB", "investigational", "sponsor",
+        "CRF", "case report form", "adverse event", "protocol amendment",
+        "principal investigator", "inclusion criteria", "exclusion criteria", "randomisation"
+      ],
+      "exclusions": []
+    },
+    {
+      "class_symbolic_name": "ReferralLetter",
+      "description": "Communications from a referring provider to a specialist or facility requesting evaluation or treatment. Includes specialist referrals, imaging orders sent to external facilities, and care transition summaries.",
+      "content_signals": [
+        "referral", "referred to", "referring physician", "specialist", "please evaluate",
+        "reason for referral", "clinical summary", "requesting provider", "NPI",
+        "care transition", "consult request", "to the attention of"
+      ],
+      "exclusions": [
+        "Do not classify as ReferralLetter if the document is a full clinical progress note. Classify as PatientRecord instead."
+      ]
+    }
+  ],
+
+  "fallback": {
+    "description": "If no class meets the minimum confidence threshold, retain the document in its current class. Misclassification in a clinical context carries patient safety and HIPAA compliance risk.",
+    "action": "retain_current_class",
+    "prohibition": "If confidence is below threshold, do not recommend, suggest, or offer any target class as a possible fit. The only valid outcome is retain_current_class."
+  }
+}
